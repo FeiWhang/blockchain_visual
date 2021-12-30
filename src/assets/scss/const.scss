@@ -1,0 +1,55 @@
+.Content {
+  --layoutPadding: 16px;
+  --innerPadding: 12px;
+  --layoutWidthMax: 1080px;
+  --layoutWidth: calc(var(--layoutWidthMax) - var(--layoutPadding) * 2);
+  --buttonPadding: 10px 20px;
+  --buttonPaddingS: 8px 16px;
+  --sectionPadding: 128px;
+  --sectionHeightMax: 1080px;
+  --headerHeight: 84px;
+  --headerLogoWidth: 42px;
+  --gapL: 32px;
+  --gapM: 24px;
+  --gapS: 8px;
+  --radiusM: 8px;
+  --radiusS: 6px;
+  --bgColor: #010e14;
+  --mainColor: #c5eafc;
+  --lightTextColor: #fff;
+  --lightBodyTextColor: #d2d4ea;
+  --darkTextColor: #000;
+  --fontS: 16px;
+  --fontM: 18px;
+  --fontL: 36px;
+  --fontXL: clamp(20px, 7.5vw, 64px);
+  --mainCubic: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --revealDuration: 0.3s;
+  --hoverTransitionDuration: 0.15s;
+  --buttonHoverTransition: box-shadow var(--hoverTransitionDuration)
+      var(--mainCubic),
+    transform var(--hoverTransitionDuration) var(--mainCubic);
+  --colorTransition: color var(--hoverTransitionDuration) var(--mainCubic);
+  --bgTransition: background-color var(--hoverTransitionDuration)
+    var(--mainCubic);
+  &--lg {
+    --layoutWidth: var(--layoutWidthMax);
+  }
+  &--md {
+    --sectionPadding: 72px;
+    --headerHeight: 72px;
+    --headerLogoWidth: 32px;
+  }
+  &--sm {
+    --headerHeight: 64px;
+    --headerLogoWidth: 36px;
+    --fontS: 15px;
+    --fontM: 16px;
+    --fontL: 32px;
+  }
+  &--xs {
+    --sectionPadding: 72px;
+    --headerHeight: 72px;
+    --headerLogoWidth: 32px;
+  }
+}
