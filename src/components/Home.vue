@@ -690,7 +690,7 @@ const screen: myScreen = inject("screen") as myScreen;
   }
   to {
     transform: translate3d(-2px, -4px, 0);
-    box-shadow: 4px 5px 4px #0697db;
+    box-shadow: 4px 5px 4px var(--mainColor5);
   }
 }
 </style>
