@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref, inject } from "vue";
+import { myScreen } from "@/composables/screen";
 
-const screen = inject("screen");
+const screen: myScreen = inject("screen") as myScreen;
+const showMobileDialog = ref(true);
 </script>
 
 <template>
   <header
     class="Header"
-    :class="screen.type ? 'Header--' + screen.type : ''"
+    :class="'Header--' + screen.type"
     :style="{
       'background-color':
         screen.scroll > 128 ? 'var(--bgColor)' : 'transparent',
@@ -17,55 +19,66 @@ const screen = inject("screen");
       <div class="Header__navContainer">
         <a class="Header__logo" aria-label="Click logo to go back home">
           <svg
-            viewBox="0 0 33 30"
+            viewBox="0 0 96 96"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M0 7.45129L15.6198 13.7358V29.3557L0 23.0711V7.45129Z"
-              fill="url(#paint0_linear_103_565)"
+              d="M3 69.8348V25.9906L47 43.6938V87.5379L3 69.8348Z"
+              fill="url(#paint0_linear_134_7)"
+              fill-opacity="0.8"
+              stroke="#010E14"
+              stroke-width="2"
+              stroke-linejoin="round"
             />
             <path
-              d="M32.4056 7.45129L16.7858 13.7358V29.3557L32.4056 23.0711V7.45129Z"
-              fill="url(#paint1_linear_103_565)"
+              d="M93 69.8348V25.9906L49 43.6938V87.5379L93 69.8348Z"
+              fill="url(#paint1_linear_134_7)"
+              fill-opacity="0.9"
+              stroke="#010E14"
+              stroke-width="2"
+              stroke-linejoin="round"
             />
             <path
-              d="M16.2028 0L0.582978 6.28542L16.2028 12.57L31.8226 6.28542L16.2028 0Z"
-              fill="url(#paint2_linear_103_565)"
+              d="M91.3211 24.5103L48 7.07793L4.6789 24.5103L48 41.9403L91.3211 24.5103Z"
+              fill="url(#paint2_linear_134_7)"
+              stroke="#010E14"
+              stroke-width="2"
+              stroke-linejoin="round"
             />
             <defs>
               <linearGradient
-                id="paint0_linear_103_565"
-                x1="7.80991"
-                y1="7.45129"
-                x2="7.80991"
-                y2="29.3557"
+                id="paint0_linear_134_7"
+                x1="25"
+                y1="24.5104"
+                x2="25"
+                y2="89.0182"
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stop-color="#CED1F3" />
-                <stop offset="0.760417" stop-color="#D8F3FD" />
+                <stop offset="1" stop-color="#D8F3FD" />
               </linearGradient>
               <linearGradient
-                id="paint1_linear_103_565"
-                x1="24.5957"
-                y1="7.45129"
-                x2="24.5957"
-                y2="29.3557"
+                id="paint1_linear_134_7"
+                x1="71"
+                y1="24.5104"
+                x2="71"
+                y2="89.0182"
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stop-color="#CED1F3" />
-                <stop offset="0.760417" stop-color="#D8F3FD" />
+                <stop offset="1" stop-color="#D8F3FD" />
               </linearGradient>
               <linearGradient
-                id="paint2_linear_103_565"
-                x1="16.2028"
-                y1="0"
-                x2="16.2028"
-                y2="12.57"
+                id="paint2_linear_134_7"
+                x1="48"
+                y1="6"
+                x2="48"
+                y2="43.0182"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#CED1F3" />
-                <stop offset="0.760417" stop-color="#D8F3FD" />
+                <stop stop-color="#D2D4EA" />
+                <stop offset="1" stop-color="#D8F3FD" />
               </linearGradient>
             </defs>
           </svg>
@@ -127,10 +140,28 @@ const screen = inject("screen");
         </div>
       </div>
     </div>
+    <div class="Header__mobileDialog" v-if="showMobileDialog">
+      <nav class="Header__mobileNav">
+        <ul class="Header__mobileNavList">
+          <li class="Header__mobileNavItem" id="mobileLink1">
+            <a class="Header__mobileNavLink">Hash</a>
+          </li>
+          <li class="Header__mobileNavItem" id="mobileLink1">
+            <a class="Header__mobileNavLink">Block</a>
+          </li>
+          <li class="Header__mobileNavItem" id="mobileLink1">
+            <a class="Header__mobileNavLink">Blockchain</a>
+          </li>
+          <li class="Header__mobileNavItem" id="mobileLink1">
+            <a class="Header__mobileNavLink">Coinbase</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../assets/scss/const.scss";
 
 .Header {

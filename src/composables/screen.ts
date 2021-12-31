@@ -1,11 +1,25 @@
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import { onMounted, onUnmounted, reactive } from "vue";
 
-export function useScreen() {
-  const width = ref<number>(window.innerWidth);
-  const scroll = ref<number>(window.scrollY);
+export interface myScreen {
+  width: number;
+  vh: number;
+  type: string;
+  scroll: number;
+}
 
-  const onWidthChange = () => (width.value = window.innerWidth);
-  const onScrollChange = () => (scroll.value = window.scrollY);
+export function useScreen(): myScreen {
+  const screen: myScreen = reactive({
+    width: window.innerWidth,
+    vh: window.innerHeight * 0.01,
+    scroll: window.screenY,
+    type: getScreenType(window.innerWidth),
+  });
+
+  const onWidthChange = () => {
+    screen.width = window.innerWidth;
+    screen.type = getScreenType(screen.width);
+  };
+  const onScrollChange = () => (screen.scroll = window.scrollY);
 
   onMounted(() => {
     window.addEventListener("resize", onWidthChange, { passive: true });
@@ -16,17 +30,13 @@ export function useScreen() {
     window.removeEventListener("scroll", onScrollChange);
   });
 
-  const type = computed<string>(() => {
-    if (width.value < 600) return "xs";
-    if (width.value >= 600 && width.value < 900) return "sm";
-    if (width.value >= 900 && width.value < 1112) return "md";
-    if (width.value >= 1112) return "lg";
-    return "";
-  });
+  return screen;
+}
 
-  return {
-    width,
-    type,
-    scroll,
-  };
+function getScreenType(width: number): string {
+  if (width < 600) return "xs";
+  else if (width >= 600 && width < 900) return "sm";
+  else if (width >= 900 && width < 1112) return "md";
+  else if (width >= 1112) return "lg";
+  else return "";
 }

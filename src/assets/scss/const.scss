@@ -1,4 +1,5 @@
 .Content {
+  min-width: 360px;
   --layoutPadding: 16px;
   --innerPadding: 12px;
   --layoutWidthMax: 1080px;
@@ -22,7 +23,7 @@
   --fontS: 16px;
   --fontM: 18px;
   --fontL: 36px;
-  --fontXL: clamp(20px, 7.5vw, 64px);
+  --fontXL: clamp(28px, 8vw, 64px);
   --mainCubic: cubic-bezier(0.22, 0.61, 0.36, 1);
   --revealDuration: 0.3s;
   --hoverTransitionDuration: 0.15s;
@@ -36,11 +37,12 @@
     --layoutWidth: var(--layoutWidthMax);
   }
   &--md {
-    --sectionPadding: 72px;
+    --sectionPadding: 102px;
     --headerHeight: 72px;
     --headerLogoWidth: 32px;
   }
   &--sm {
+    --sectionPadding: 72px;
     --headerHeight: 64px;
     --headerLogoWidth: 36px;
     --fontS: 15px;
@@ -49,7 +51,10 @@
   }
   &--xs {
     --sectionPadding: 72px;
-    --headerHeight: 72px;
+    --headerHeight: 64px;
     --headerLogoWidth: 32px;
+    --fontS: 15px;
+    --fontM: 16px;
+    --fontL: 32px;
   }
 }

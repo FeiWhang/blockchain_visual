@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { ref, provide, Ref } from "vue";
-import { useScreen } from "./composables/screen";
-import Header from "./components/Header.vue";
-import Home from "./components/Home.vue";
+import { ref, provide, Ref, defineComponent } from "vue";
+import { myScreen, useScreen } from "@/composables/screen";
+import Header from "@/components/Header.vue";
+import Home from "@/components/Home.vue";
 
-const screen: Ref = ref(useScreen());
+const screen = ref(useScreen()) as Ref<myScreen>;
 provide("screen", screen);
 </script>
 
 <template>
-  <div class="Content" :class="'Content--' + screen.type">
+  <div
+    class="Content"
+    :class="'Content--' + screen.type"
+    :style="{ '--vh': screen.vh }"
+  >
     <Header />
     <Home />
   </div>
