@@ -3,19 +3,17 @@ import { ref, provide, Ref, defineComponent } from "vue";
 import { myScreen, useScreen } from "@/composables/screen";
 import Header from "@/components/Header.vue";
 import Home from "@/components/Home.vue";
+import Hash from "@/components/Hash.vue";
 
 const screen = ref(useScreen()) as Ref<myScreen>;
 provide("screen", screen);
 </script>
 
 <template>
-  <div
-    class="Content"
-    :class="'Content--' + screen.type"
-    :style="{ '--vh': screen.vh }"
-  >
+  <div class="Content" :class="'Content--' + screen.type">
     <Header />
     <Home />
+    <Hash />
   </div>
 </template>
 

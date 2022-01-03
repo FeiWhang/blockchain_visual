@@ -1,15 +1,17 @@
 .Content {
-  min-width: 360px;
-  --layoutPadding: 16px;
-  --innerPadding: 12px;
+  min-width: var(--minWidth);
+  --minWidth: 360px;
   --layoutWidthMax: 1080px;
   --layoutWidth: calc(var(--layoutWidthMax) - var(--layoutPadding) * 2);
+  --layoutPadding: 32px;
+  --innerPadding: 12px;
   --buttonPadding: 10px 20px;
   --buttonPaddingS: 8px 16px;
   --sectionPadding: 128px;
   --sectionHeightMax: 1080px;
   --headerHeight: 84px;
   --headerLogoWidth: 42px;
+  --gapXL: 64px;
   --gapL: 32px;
   --gapM: 24px;
   --gapS: 8px;
@@ -17,17 +19,22 @@
   --radiusS: 6px;
   --bgColor: #010e14;
   --mainColor: #c5eafc;
+  --mainColor10: #05151d73;
   --mainColor9: #011d27;
   --mainColor8: #022b3b;
   --mainColor6: #035377;
   --mainColor5: #0681b1;
+  --mainColor2: #cef1ff;
   --lightTextColor: #fff;
   --lightBodyTextColor: #d2d4ea;
   --darkTextColor: #000;
+  --darkBodyTextColor: #023a50;
   --fontS: 16px;
-  --fontM: 18px;
+  --fontR: 18px;
+  --fontM: 24px;
   --fontL: 36px;
-  --fontXL: clamp(28px, 8vw, 64px);
+  --fontXL: clamp(28px, 8.8vw, 64px);
+  --mainSkew: -6.9deg;
   --mainCubic: cubic-bezier(0.22, 0.61, 0.36, 1);
   --revealDuration: 0.3s;
   --hoverTransitionDuration: 0.15s;
@@ -44,13 +51,18 @@
     --sectionPadding: 102px;
     --headerHeight: 72px;
     --headerLogoWidth: 32px;
+    --fontS: 16px;
+    --fontR: 18px;
+    --fontM: 22px;
+    --fontL: 34px;
   }
   &--sm {
-    --sectionPadding: 72px;
+    --sectionPadding: 84px;
     --headerHeight: 64px;
     --headerLogoWidth: 36px;
     --fontS: 15px;
-    --fontM: 16px;
+    --fontR: 16px;
+    --fontM: 20px;
     --fontL: 32px;
   }
   &--xs {
@@ -58,7 +70,8 @@
     --headerHeight: 64px;
     --headerLogoWidth: 32px;
     --fontS: 15px;
-    --fontM: 16px;
-    --fontL: 32px;
+    --fontR: 16px;
+    --fontM: 20px;
+    --fontL: 30px;
   }
 }

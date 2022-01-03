@@ -510,7 +510,7 @@ const screen: myScreen = inject("screen") as myScreen;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     row-gap: var(--sectionPadding);
   }
   &__hero {
@@ -518,7 +518,7 @@ const screen: myScreen = inject("screen") as myScreen;
   }
   &__heroTitle {
     font-size: var(--fontXL);
-    letter-spacing: 4px;
+    letter-spacing: 1.234px;
     margin-bottom: var(--gapS);
     opacity: 0;
     color: var(--lightTextColor);
@@ -526,7 +526,7 @@ const screen: myScreen = inject("screen") as myScreen;
       calc(var(--revealDuration) * var(--delayInitDuration)) forwards;
   }
   &__heroSubtitle {
-    font-size: var(--fontM);
+    font-size: var(--fontR);
     color: var(--lightBodyTextColor);
     font-weight: 400;
     margin-bottom: var(--gapL);
@@ -534,6 +534,7 @@ const screen: myScreen = inject("screen") as myScreen;
     animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
       calc(var(--revealDuration) * (var(--delayInitDuration) + 0.5)) forwards;
   }
+  $duration: 0.369s;
   &__cta {
     padding: var(--buttonPadding);
     background-color: var(--mainColor);
@@ -543,16 +544,18 @@ const screen: myScreen = inject("screen") as myScreen;
     animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
         calc(var(--revealDuration) * (var(--delayInitDuration) + 1)) forwards,
       hovering 0.88s var(--mainCubic)
-        calc(var(--revealDuration) * (var(--delayInitDuration) + 2)) infinite
-        alternate;
+        calc(
+          var(--revealDuration) * (var(--delayInitDuration) + 3) + $duration *
+            5.6789
+        )
+        infinite alternate;
     &:hover {
       animation-play-state: paused;
     }
   }
   &__illu {
-    width: clamp(250px, 80vw, 500px);
+    width: clamp(250px, 88vw, 500px);
     svg {
-      $duration: 0.369s;
       [id^="Block"] {
         opacity: 0;
         transform-origin: bottom left;

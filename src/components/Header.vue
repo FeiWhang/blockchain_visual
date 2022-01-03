@@ -195,7 +195,7 @@ const showMobileDialog = ref(false);
     justify-content: space-between;
     align-items: center;
     height: var(--headerHeight);
-    padding: var(--innerPadding);
+    padding: var(--innerPadding) 0;
   }
   &__logo {
     margin-right: var(--logoMarginRight);
@@ -323,7 +323,7 @@ const showMobileDialog = ref(false);
       var(--revealDuration) forwards;
     --rightActionGap: var(--gapM);
     --navOrient: column;
-    --navLinkFontSize: calc(var(--fontM) * 1.5);
+    --navLinkFontSize: calc(var(--fontR) * 1.5);
   }
 }
 

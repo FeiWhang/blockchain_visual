@@ -24,6 +24,10 @@ h1 {
   font-weight: 700;
 }
 
+textarea {
+  resize: none;
+}
+
 .Section {
   &__container {
     position: relative;
@@ -31,7 +35,6 @@ h1 {
     max-width: var(--layoutWidth);
     margin: 0 auto;
     padding: var(--sectionPadding) var(--layoutPadding);
-    aspect-ratio: 2/1;
   }
 }
 
