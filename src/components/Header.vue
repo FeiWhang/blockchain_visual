@@ -17,7 +17,7 @@ const showMobileDialog = ref(false);
   >
     <div class="Header__container">
       <div class="Header__navContainer">
-        <a class="Header__logo" aria-label="Click logo to go back home">
+        <router-link class="Header__logo" to="/">
           <svg
             viewBox="0 0 96 96"
             fill="none"
@@ -82,20 +82,26 @@ const showMobileDialog = ref(false);
               </linearGradient>
             </defs>
           </svg>
-        </a>
+        </router-link>
         <nav class="HeaderNav">
           <ul class="HeaderNav__list">
-            <li class="HeaderNav__item" id="link1">
-              <a class="HeaderNav__link">Hash</a>
+            <li class="HeaderNav__item">
+              <router-link class="HeaderNav__link" to="/hash">Hash</router-link>
             </li>
-            <li class="HeaderNav__item" id="link2">
-              <a class="HeaderNav__link">Block</a>
+            <li class="HeaderNav__item">
+              <router-link class="HeaderNav__link" to="/hash"
+                >Block</router-link
+              >
             </li>
-            <li class="HeaderNav__item" id="link3">
-              <a class="HeaderNav__link">Blockchain</a>
+            <li class="HeaderNav__item">
+              <router-link class="HeaderNav__link" to="/hash"
+                >Blockchain</router-link
+              >
             </li>
-            <li class="HeaderNav__item" id="link4">
-              <a class="HeaderNav__link">Coinbase</a>
+            <li class="HeaderNav__item">
+              <router-link class="HeaderNav__link" to="/hash"
+                >Coinbase</router-link
+              >
             </li>
           </ul>
         </nav>
@@ -156,16 +162,22 @@ const showMobileDialog = ref(false);
         <nav class="HeaderNav HeaderNav--mobile">
           <ul class="HeaderNav__list">
             <li class="HeaderNav__item">
-              <a class="HeaderNav__link">Hash</a>
+              <router-link class="HeaderNav__link" to="/hash">Hash</router-link>
             </li>
             <li class="HeaderNav__item">
-              <a class="HeaderNav__link">Block</a>
+              <router-link class="HeaderNav__link" to="/hash"
+                >Block</router-link
+              >
             </li>
             <li class="HeaderNav__item">
-              <a class="HeaderNav__link">Blockchain</a>
+              <router-link class="HeaderNav__link" to="/hash"
+                >Blockchain</router-link
+              >
             </li>
             <li class="HeaderNav__item">
-              <a class="HeaderNav__link">Coinbase</a>
+              <router-link class="HeaderNav__link" to="/hash"
+                >Coinbase</router-link
+              >
             </li>
           </ul>
         </nav>
@@ -277,6 +289,7 @@ const showMobileDialog = ref(false);
       font-size: var(--navLinkFontSize);
       transition: var(--colorTransition);
       color: var(--lightTextColor);
+      text-decoration: none;
       &:hover {
         color: var(--mainColor);
       }

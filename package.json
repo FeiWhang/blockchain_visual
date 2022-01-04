@@ -10,7 +10,8 @@
     "crypto-js": "^4.1.1",
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.1.0",

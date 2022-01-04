@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ref, provide, Ref, defineComponent } from "vue";
+import { ref, provide, Ref } from "vue";
 import { myScreen, useScreen } from "@/composables/screen";
 import Header from "@/components/Header.vue";
-import Home from "@/components/Home.vue";
-import Hash from "@/components/Hash.vue";
 
 const screen = ref(useScreen()) as Ref<myScreen>;
 provide("screen", screen);
@@ -12,8 +10,7 @@ provide("screen", screen);
 <template>
   <div class="Content" :class="'Content--' + screen.type">
     <Header />
-    <Home />
-    <Hash />
+    <router-view></router-view>
   </div>
 </template>
 

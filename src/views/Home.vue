@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, inject } from "vue";
+import { inject } from "vue";
 import { myScreen } from "@/composables/screen";
 
 const screen: myScreen = inject("screen") as myScreen;
