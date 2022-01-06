@@ -16,7 +16,7 @@ onMounted(() => {
         "fadeInAngle " +
         duration +
         "s var(--mainCubic) " +
-        (0.3 * 3 + duration * i) +
+        (0.3 * 2.5 + duration * i) +
         "s forwards";
     const chainEl = document.getElementById("Chain" + i + (i + 1).toString());
     if (chainEl)
@@ -24,7 +24,7 @@ onMounted(() => {
         "stroke " +
         duration +
         "s var(--mainCubic) " +
-        (0.3 * 3 + duration * (i + 0.5)) +
+        (0.3 * 2.5 + duration * (i + 0.5)) +
         "s forwards";
   }
 });
@@ -52,17 +52,19 @@ onMounted(() => {
                 <path
                   id="Front"
                   d="M17 192.978L82.8739 219.482V285.355L17 258.852V192.978Z"
-                  fill="url(#paint0_linear_170_71)"
+                  fill="#C5C9F5"
+                  fill-opacity="0.8"
                 />
                 <path
                   id="Side"
                   d="M154.385 192.978L88.5112 219.482V285.355L154.385 258.852V192.978Z"
-                  fill="url(#paint1_linear_170_71)"
+                  fill="#C5C9F5"
+                  fill-opacity="0.9"
                 />
                 <path
                   id="Above"
                   d="M85.6924 160.833L19.8186 187.341L85.6924 213.845L151.566 187.341L85.6924 160.833Z"
-                  fill="url(#paint2_linear_170_71)"
+                  fill="#C5C9F5"
                 />
               </g>
               <g id="Block6">
@@ -109,34 +111,38 @@ onMounted(() => {
                 <path
                   id="Front_4"
                   d="M189 265.145L254.874 291.649V357.522L189 331.019V265.145Z"
-                  fill="url(#paint3_linear_170_71)"
+                  fill="#C5C9F5"
+                  fill-opacity="0.8"
                 />
                 <path
                   id="Side_4"
                   d="M326.385 265.145L260.511 291.649V357.522L326.385 331.019V265.145Z"
-                  fill="url(#paint4_linear_170_71)"
+                  fill="#C5C9F5"
+                  fill-opacity="0.9"
                 />
                 <path
                   id="Above_4"
                   d="M257.692 233L191.819 259.508L257.692 286.012L323.566 259.508L257.692 233Z"
-                  fill="url(#paint5_linear_170_71)"
+                  fill="#C5C9F5"
                 />
               </g>
               <g id="Block3">
                 <path
                   id="Front_5"
                   d="M362 49.1447L427.874 75.6486V141.522L362 115.019V49.1447Z"
-                  fill="url(#paint6_linear_170_71)"
+                  fill="#C5C9F5"
+                  fill-opacity="0.8"
                 />
                 <path
                   id="Side_5"
                   d="M499.385 49.1447L433.511 75.6486V141.522L499.385 115.019V49.1447Z"
-                  fill="url(#paint7_linear_170_71)"
+                  fill="#C5C9F5"
+                  fill-opacity="0.9"
                 />
                 <path
                   id="Above_5"
                   d="M430.692 17L364.819 43.5076L430.692 70.0116L496.566 43.5076L430.692 17Z"
-                  fill="url(#paint8_linear_170_71)"
+                  fill="#C5C9F5"
                 />
               </g>
               <g id="Block4">
@@ -196,107 +202,6 @@ onMounted(() => {
               stroke-linecap="round"
             />
           </g>
-          <defs>
-            <linearGradient
-              id="paint0_linear_170_71"
-              x1="49.9369"
-              y1="192.978"
-              x2="49.9369"
-              y2="285.355"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0.161458" stop-color="#D2D4EA" />
-              <stop offset="1" stop-color="#0B9CD5" />
-            </linearGradient>
-            <linearGradient
-              id="paint1_linear_170_71"
-              x1="121.448"
-              y1="192.978"
-              x2="121.448"
-              y2="285.355"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#CED1F3" />
-              <stop offset="0.729167" stop-color="#16B4F3" />
-            </linearGradient>
-            <linearGradient
-              id="paint2_linear_170_71"
-              x1="85.6924"
-              y1="160.833"
-              x2="85.6924"
-              y2="213.845"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#CED1F3" />
-              <stop offset="1" stop-color="#3DC1F5" />
-            </linearGradient>
-            <linearGradient
-              id="paint3_linear_170_71"
-              x1="221.937"
-              y1="265.145"
-              x2="221.937"
-              y2="357.522"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0.161458" stop-color="#D2D4EA" />
-              <stop offset="1" stop-color="#0B9CD5" />
-            </linearGradient>
-            <linearGradient
-              id="paint4_linear_170_71"
-              x1="293.448"
-              y1="265.145"
-              x2="293.448"
-              y2="357.522"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#CED1F3" />
-              <stop offset="0.729167" stop-color="#16B4F3" />
-            </linearGradient>
-            <linearGradient
-              id="paint5_linear_170_71"
-              x1="257.692"
-              y1="233"
-              x2="257.692"
-              y2="286.012"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#CED1F3" />
-              <stop offset="1" stop-color="#3DC1F5" />
-            </linearGradient>
-            <linearGradient
-              id="paint6_linear_170_71"
-              x1="394.937"
-              y1="49.1447"
-              x2="394.937"
-              y2="141.522"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0.161458" stop-color="#D2D4EA" />
-              <stop offset="1" stop-color="#0B9CD5" />
-            </linearGradient>
-            <linearGradient
-              id="paint7_linear_170_71"
-              x1="466.448"
-              y1="49.1447"
-              x2="466.448"
-              y2="141.522"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#CED1F3" />
-              <stop offset="0.729167" stop-color="#16B4F3" />
-            </linearGradient>
-            <linearGradient
-              id="paint8_linear_170_71"
-              x1="430.692"
-              y1="17"
-              x2="430.692"
-              y2="70.0116"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#CED1F3" />
-              <stop offset="1" stop-color="#3DC1F5" />
-            </linearGradient>
-          </defs>
         </svg>
       </div>
     </div>

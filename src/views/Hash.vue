@@ -6,9 +6,12 @@ const data: Ref<string> = ref<string>("");
 const hash: Ref<string> = ref<string>(
   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 );
-
+const status: Ref<string> = ref<string>("The hash of an empty data");
 function onDataChange() {
   hash.value = getHash(data.value);
+  data.value
+    ? (status.value = "Hash changes as data changes")
+    : (status.value = "The hash of an empty data");
 }
 </script>
 
@@ -19,7 +22,7 @@ function onDataChange() {
       <h2 class="Hash__title">Hash</h2>
       <form @submit.prevent class="Hash__form">
         <div class="Hash__inputContainer">
-          <label for="data" class="Hash__label"
+          <label for="hash" class="Hash__label Hash__label--hash"
             ><svg
               viewBox="0 0 32 32"
               fill="none"
@@ -37,9 +40,24 @@ function onDataChange() {
               {{ hash }}
             </p>
           </div>
+          <label for="hash" class="Hash__status"
+            ><svg
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M1.5 1.5C1.36739 1.5 1.24021 1.55268 1.14645 1.64645C1.05268 1.74021 1 1.86739 1 2V6.8C1 7.1283 1.06466 7.45339 1.1903 7.75671C1.31594 8.06002 1.50009 8.33562 1.73223 8.56777C2.20107 9.03661 2.83696 9.3 3.5 9.3H13.293L9.946 12.646C9.85211 12.7399 9.79937 12.8672 9.79937 13C9.79937 13.1328 9.85211 13.2601 9.946 13.354C10.0399 13.4479 10.1672 13.5006 10.3 13.5006C10.4328 13.5006 10.5601 13.4479 10.654 13.354L14.854 9.154C14.9006 9.10755 14.9375 9.05238 14.9627 8.99163C14.9879 8.93089 15.0009 8.86577 15.0009 8.8C15.0009 8.73423 14.9879 8.66911 14.9627 8.60837C14.9375 8.54762 14.9006 8.49245 14.854 8.446L10.854 4.446C10.7601 4.35211 10.6328 4.29937 10.5 4.29937C10.3672 4.29937 10.2399 4.35211 10.146 4.446C10.0521 4.53989 9.99937 4.66722 9.99937 4.8C9.99937 4.93278 10.0521 5.06011 10.146 5.154L13.293 8.3H3.5C3.10218 8.3 2.72064 8.14196 2.43934 7.86066C2.15804 7.57936 2 7.19782 2 6.8V2C2 1.86739 1.94732 1.74021 1.85355 1.64645C1.75979 1.55268 1.63261 1.5 1.5 1.5V1.5Z"
+                fill="black"
+              />
+            </svg>
+            <span :key="status">{{ status }}</span></label
+          >
         </div>
         <div class="Hash__inputContainer">
-          <label for="data" class="Hash__label">
+          <label for="data" class="Hash__label Hash__label--data">
             <svg
               viewBox="0 0 32 32"
               fill="none"
@@ -71,6 +89,7 @@ function onDataChange() {
           ></textarea>
         </div>
       </form>
+      <button class="Hash__showExpl">Show concepts</button>
     </div>
     <div class="Hash__bgMask"></div>
   </section>
@@ -89,12 +108,18 @@ function onDataChange() {
   &__subtitle {
     font-size: var(--fontS);
     color: var(--mainColor8);
+    opacity: 0;
+    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+      calc(var(--revealDuration)) forwards;
   }
   &__title {
     font-size: var(--fontL);
     color: var(--mainColor1);
     margin-top: var(--gapM);
     margin-bottom: calc(var(--sectionPadding) * 0.5);
+    opacity: 0;
+    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+      calc(var(--revealDuration) * 1.5) forwards;
   }
   &__form {
     display: flex;
@@ -115,6 +140,20 @@ function onDataChange() {
         fill: var(--mainColor3);
       }
     }
+    opacity: 0;
+    &--hash {
+      animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+        calc(var(--revealDuration) * 2) forwards;
+    }
+    &--data {
+      animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+        calc(var(--revealDuration) * 3) forwards;
+    }
+  }
+  &__inputContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--gapS);
   }
   &__input {
     font-family: Inter;
@@ -130,12 +169,16 @@ function onDataChange() {
       calc(100vw - var(--layoutPadding) * 2),
       724px
     );
+    opacity: 0;
+    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+      calc(var(--revealDuration) * 3.5) forwards;
     &:focus {
       box-shadow: 0 0 6px var(--mainColor16);
     }
     &--placeholder {
-      position: relative;
       cursor: not-allowed;
+      animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+        calc(var(--revealDuration) * 2.5) forwards;
     }
   }
   &__placeholder {
@@ -144,10 +187,44 @@ function onDataChange() {
     letter-spacing: 1px;
     overflow: hidden;
   }
-  &__inputContainer {
+  &__status {
     display: flex;
-    flex-direction: column;
-    row-gap: var(--gapS);
+
+    margin-left: var(--gapM);
+    opacity: 0;
+    animation: fadeInAngle var(--revealDuration) var(--mainCubic)
+      calc(var(--revealDuration) * 5.5) forwards;
+    svg {
+      margin-right: var(--gapS);
+      width: var(--fontR);
+      path {
+        fill: var(--mainColor5);
+      }
+    }
+    span {
+      font-size: var(--fontXS);
+      color: var(--mainColor3);
+      animation: fadeInAngle var(--revealDuration) var(--mainCubic) forwards;
+    }
+  }
+  &__showExpl {
+    display: flex;
+    align-items: center;
+    column-gap: var(--gapR);
+    margin-top: var(--gapXL);
+    color: var(--mainColor1);
+    padding: var(--buttonPaddingS);
+    background-color: var(--mainColor21);
+    border-radius: var(--radiusS);
+    transition: var(--buttonHoverTransition);
+    font-size: var(--fontXS);
+    opacity: 0;
+    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+      calc(var(--revealDuration) * 4) forwards;
+    &:hover {
+      box-shadow: 4px 5px 4px var(--mainColor15);
+      transform: translate3d(-1px, -2px, 0);
+    }
   }
 }
 

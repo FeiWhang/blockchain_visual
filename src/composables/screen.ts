@@ -3,13 +3,11 @@ import { onMounted, onUnmounted, reactive } from "vue";
 export interface myScreen {
   width: number;
   type: string;
-  scroll: number;
 }
 
 export function useScreen(): myScreen {
   const screen: myScreen = reactive({
     width: window.innerWidth,
-    scroll: window.screenY,
     type: getScreenType(window.innerWidth),
   });
 

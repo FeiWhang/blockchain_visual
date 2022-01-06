@@ -16,9 +16,12 @@
   --gapXL: 64px;
   --gapL: 32px;
   --gapM: 24px;
+  --gapR: 16px;
   --gapS: 8px;
   --radiusM: 8px;
   --radiusS: 6px;
+  --fontXXS: 14px;
+  --fontXS: 15px;
   --fontS: 16px;
   --fontR: 18px;
   --fontM: 24px;
@@ -91,6 +94,8 @@
     --sectionPadding: 102px;
     --headerHeight: 72px;
     --headerLogoWidth: 32px;
+    --fontXXS: 14px;
+    --fontXS: 15px;
     --fontS: 16px;
     --fontR: 18px;
     --fontM: 22px;
@@ -100,6 +105,8 @@
     --sectionPadding: 84px;
     --headerHeight: 64px;
     --headerLogoWidth: 36px;
+    --fontXXS: 13px;
+    --fontXS: 14px;
     --fontS: 15px;
     --fontR: 16px;
     --fontM: 20px;
@@ -109,6 +116,8 @@
     --sectionPadding: 72px;
     --headerHeight: 64px;
     --headerLogoWidth: 32px;
+    --fontXXS: 13px;
+    --fontXS: 14px;
     --fontS: 15px;
     --fontR: 16px;
     --fontM: 20px;
@@ -131,5 +140,16 @@
 @keyframes stroke {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeInFromAbove {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }

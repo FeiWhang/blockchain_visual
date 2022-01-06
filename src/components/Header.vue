@@ -14,14 +14,7 @@ function setTheme() {
 </script>
 
 <template>
-  <header
-    class="Header"
-    :class="'Header--' + screen.type"
-    :style="{
-      'background-color':
-        screen.scroll > 128 ? 'var(--bgColor)' : 'transparent',
-    }"
-  >
+  <header class="Header" :class="'Header--' + screen.type">
     <div class="Header__container">
       <div class="Header__navContainer">
         <router-link class="Header__logo" to="/">
@@ -138,7 +131,13 @@ function setTheme() {
       </div>
     </div>
     <transition name="moveInOut">
-      <div class="Header__mobileDialog" v-if="showMobileDialog">
+      <div
+        class="Header__mobileDialog"
+        v-if="showMobileDialog"
+        @wheel.prevent
+        @touchmove.prevent
+        @scroll.prevent
+      >
         <button class="Header__mobileClose" @click="showMobileDialog = false">
           <svg viewBox="0 0 16 10">
             <title>Close mobile navigation</title>
@@ -262,7 +261,7 @@ function setTheme() {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--mainColor9);
+    background-color: var(--mainColor21);
   }
   &__mobileClose {
     width: calc(var(--hamSize) + 4px);
