@@ -436,7 +436,7 @@ __metadata:
     typescript: ^4.4.4
     vite: ^2.7.2
     vue: ^3.2.25
-    vue-router: 4
+    vue-router: ^4.0.12
     vue-tsc: ^0.29.8
   languageName: unknown
   linkType: soft
@@ -2236,7 +2236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-router@npm:4":
+"vue-router@npm:^4.0.12":
   version: 4.0.12
   resolution: "vue-router@npm:4.0.12"
   dependencies:

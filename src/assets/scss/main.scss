@@ -17,6 +17,7 @@ button {
   font-size: var(--fontS);
   font-family: "Inter";
   font-weight: 400;
+  text-decoration: none;
 }
 
 h1 {
@@ -36,12 +37,44 @@ textarea {
     margin: 0 auto;
     padding: var(--sectionPadding) var(--layoutPadding);
     height: calc(100vh - var(--headerHeight));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
   }
 }
 
 .Cta {
   border-radius: var(--radiusS);
   font-size: var(--fontS);
+}
+
+.Guide {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  &__hole {
+    position: absolute;
+    border-radius: var(--radiusM);
+    box-shadow: 0 0 0 9999px rgba(#000, 0.88);
+  }
+  &__card {
+    position: relative;
+    border-radius: var(--radiusM);
+    background-color: var(--mainColor8);
+    padding: var(--layoutPadding);
+    width: var(--guideCardWidth);
+  }
+  &__close {
+    position: absolute;
+    top: var(--innerPadding);
+    right: var(--innerPadding);
+    width: 24px;
+    fill: var(--mainColor1);
+  }
 }
 
 // animations

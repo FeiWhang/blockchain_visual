@@ -1,8 +1,10 @@
 .Content {
   min-width: var(--minWidth);
+  background-color: var(--mainColor23);
   --minWidth: 360px;
   --layoutWidthMax: 1080px;
   --layoutWidth: calc(var(--layoutWidthMax) - var(--layoutPadding) * 2);
+  --guideCardWidth: 296px;
   --layoutPadding: 32px;
   --innerPadding: 12px;
   --buttonPadding: 10px 20px;
@@ -10,25 +12,13 @@
   --sectionPadding: 128px;
   --sectionHeightMax: 1080px;
   --headerHeight: 84px;
-  --headerLogoWidth: 42px;
+  --headerLogoWidth: 36px;
   --gapXL: 64px;
   --gapL: 32px;
   --gapM: 24px;
   --gapS: 8px;
   --radiusM: 8px;
   --radiusS: 6px;
-  --bgColor: #010e14;
-  --mainColor: #c5eafc;
-  --mainColor10: #05151d73;
-  --mainColor9: #011d27;
-  --mainColor8: #022b3b;
-  --mainColor6: #035377;
-  --mainColor5: #0681b1;
-  --mainColor2: #cef1ff;
-  --lightTextColor: #fff;
-  --lightBodyTextColor: #d2d4ea;
-  --darkTextColor: #000;
-  --darkBodyTextColor: #023a50;
   --fontS: 16px;
   --fontR: 18px;
   --fontM: 24px;
@@ -44,6 +34,56 @@
   --colorTransition: color var(--hoverTransitionDuration) var(--mainCubic);
   --bgTransition: background-color var(--hoverTransitionDuration)
     var(--mainCubic);
+  --yellow: #fffde9;
+  --mainColor23: #010e13;
+  --mainColor22: #021c27;
+  --mainColor21: #032a3a;
+  --mainColor20: #04394e;
+  --mainColor19: #054761;
+  --mainColor18: #065574;
+  --mainColor17: #076388;
+  --mainColor16: #08719b;
+  --mainColor15: #0980ae;
+  --mainColor14: #0a8ec2;
+  --mainColor13: #0b9cd5;
+  --mainColor: #0caae9;
+  --mainColor11: #16b4f3;
+  --mainColor10: #2abbf4;
+  --mainColor9: #3dc1f5;
+  --mainColor8: #51c7f6;
+  --mainColor7: #64cdf7;
+  --mainColor6: #77d3f8;
+  --mainColor5: #8bdaf9;
+  --mainColor4: #9ee0fa;
+  --mainColor3: #b1e6fb;
+  --mainColor2: #d5f2ff;
+  --mainColor1: #ecf9fe;
+  &--dark {
+    --yellow: #b7b5a5;
+    --mainColor1: #010e13;
+    --mainColor2: #021c27;
+    --mainColor3: #032a3a;
+    --mainColor4: #04394e;
+    --mainColor5: #054761;
+    --mainColor6: #065574;
+    --mainColor7: #076388;
+    --mainColor8: #08719b;
+    --mainColor9: #0980ae;
+    --mainColor10: #0a8ec2;
+    --mainColor11: #0b9cd5;
+    --mainColor: #0caae9;
+    --mainColor13: #16b4f3;
+    --mainColor14: #2abbf4;
+    --mainColor15: #3dc1f5;
+    --mainColor16: #51c7f6;
+    --mainColor17: #64cdf7;
+    --mainColor18: #77d3f8;
+    --mainColor19: #8bdaf9;
+    --mainColor20: #9ee0fa;
+    --mainColor21: #b1e6fb;
+    --mainColor22: #d5f2ff;
+    --mainColor23: #ecf9fe;
+  }
   &--lg {
     --layoutWidth: var(--layoutWidthMax);
   }
@@ -73,5 +113,23 @@
     --fontR: 16px;
     --fontM: 20px;
     --fontL: 30px;
+  }
+}
+
+// animations
+@keyframes fadeInAngle {
+  from {
+    transform: translate3d(-4.96px, -2px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes stroke {
+  to {
+    stroke-dashoffset: 0;
   }
 }

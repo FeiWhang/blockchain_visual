@@ -17,15 +17,12 @@ export function useScreen(): myScreen {
     screen.width = window.innerWidth;
     screen.type = getScreenType(screen.width);
   };
-  const onScrollChange = () => (screen.scroll = window.scrollY);
 
   onMounted(() => {
     window.addEventListener("resize", onWidthChange, { passive: true });
-    window.addEventListener("scroll", onScrollChange, { passive: true });
   });
   onUnmounted(() => {
     window.removeEventListener("resize", onWidthChange);
-    window.removeEventListener("scroll", onScrollChange);
   });
 
   return screen;

@@ -15,7 +15,8 @@ function onDataChange() {
 <template>
   <section class="Section Hash">
     <div class="Section__container Hash__container">
-      <h1 class="Hash__title">Hash</h1>
+      <p class="Hash__subtitle">Step 1</p>
+      <h2 class="Hash__title">Hash</h2>
       <form @submit.prevent class="Hash__form">
         <div class="Hash__inputContainer">
           <label for="data" class="Hash__label"
@@ -84,18 +85,15 @@ function onDataChange() {
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: var(--mainColor);
   }
-  &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    width: 100%;
+  &__subtitle {
+    font-size: var(--fontS);
+    color: var(--mainColor8);
   }
   &__title {
     font-size: var(--fontL);
-    color: var(--darkTextColor);
+    color: var(--mainColor1);
+    margin-top: var(--gapM);
     margin-bottom: calc(var(--sectionPadding) * 0.5);
   }
   &__form {
@@ -106,7 +104,7 @@ function onDataChange() {
   &__label {
     font-family: Inter;
     font-size: var(--fontR);
-    color: var(--darkTextColor);
+    color: var(--mainColor1);
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -114,15 +112,15 @@ function onDataChange() {
     svg {
       width: var(--fontR);
       path {
-        fill: var(--darkBodyTextColor);
+        fill: var(--mainColor3);
       }
     }
   }
   &__input {
     font-family: Inter;
     font-size: var(--fontS);
-    background-color: var(--mainColor2);
-    color: var(--darkBodyTextColor);
+    background-color: var(--mainColor22);
+    color: var(--mainColor2);
     padding: var(--buttonPadding);
     border-radius: var(--radiusS);
     transition: box-shadow var(--revealDuration) var(--mainCubic);
@@ -133,7 +131,7 @@ function onDataChange() {
       724px
     );
     &:focus {
-      box-shadow: 0 0 6px var(--mainColor5);
+      box-shadow: 0 0 6px var(--mainColor16);
     }
     &--placeholder {
       position: relative;
