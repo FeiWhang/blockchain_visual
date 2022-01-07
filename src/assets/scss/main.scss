@@ -35,8 +35,6 @@ textarea {
 
 .Section {
   &__container {
-    position: relative;
-    z-index: 1;
     max-width: var(--layoutWidth);
     margin: 0 auto;
     padding: var(--sectionPadding) var(--layoutPadding);
@@ -48,11 +46,8 @@ textarea {
   }
   &__showCon {
     color: var(--mainColor23);
-    padding: var(--buttonPaddingS);
     background-color: var(--mainColor5);
-    border-radius: var(--radiusS);
     transition: var(--buttonHoverTransition);
-    font-size: var(--fontXS);
     &:hover {
       box-shadow: 4px 5px 4px var(--mainColor15);
       transform: translate3d(-1px, -2px, 0);
@@ -60,8 +55,8 @@ textarea {
   }
 }
 .SectionConcept {
-  z-index: 100;
-  position: fixed;
+  z-index: 10;
+  position: absolute;
   left: 0;
   top: 0;
   display: flex;
@@ -78,7 +73,6 @@ textarea {
     justify-content: center;
     margin: 0 var(--layoutPadding);
     margin-bottom: var(--headerHeight);
-    padding: 32px;
     background-color: var(--mainColor1);
     border-radius: var(--radiusM);
     color: var(--mainColor22);
@@ -88,28 +82,48 @@ textarea {
     box-shadow: 8px 8px 12px var(--mainColor5);
     animation: fadeInScaleAngle var(--revealDuration) var(--mainCubic) forwards;
     transform-origin: top left;
-    &--close {
-      animation: fadeOutScaleAngle var(--revealDuration) var(--mainCubic)
-        forwards;
-      transform-origin: bottom right;
-    }
+  }
+  &__cardContent {
+    padding: var(--gapL);
+    padding-bottom: 0;
   }
   &__title {
     display: flex;
     align-items: center;
     column-gap: var(--gapS);
     svg {
-      width: var(--fontM);
+      width: var(--fontL);
       path {
         fill: var(--mainColor18);
       }
     }
   }
+  &__readmore {
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom-right-radius: var(--radiusM);
+    border-bottom-left-radius: var(--radiusM);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: var(--gapL);
+    padding: var(--gapR);
+    text-align: center;
+    width: 100%;
+    transition: var(--bgTransition);
+    background-color: var(--mainColor2);
+    font-size: var(--fontS);
+    color: var(--mainColor23);
+    &:hover {
+      background-color: var(--mainColor3);
+    }
+  }
   &__close {
     width: 24px;
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: var(--gapR);
+    right: var(--gapR);
     path {
       fill: var(--mainColor22);
     }
@@ -124,7 +138,19 @@ textarea {
   backface-visibility: hidden;
 }
 
+#HighLightSpan {
+  font-weight: 600;
+  color: var(--mainColor23);
+}
+
 .Cta {
   border-radius: var(--radiusS);
   font-size: var(--fontS);
+  padding: var(--buttonPadding);
+}
+
+.CtaS {
+  border-radius: var(--radiusS);
+  font-size: var(--fontXS);
+  padding: var(--buttonPaddingS);
 }

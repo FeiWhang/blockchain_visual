@@ -239,7 +239,6 @@ onMounted(() => {
   $duration: 0.369s;
   &__cta {
     display: inline-block;
-    padding: var(--buttonPadding);
     background-color: var(--mainColor5);
     color: var(--mainColor23);
     opacity: 0;

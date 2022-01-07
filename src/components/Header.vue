@@ -151,20 +151,34 @@ function setTheme() {
         <nav class="HeaderNav HeaderNav--mobile">
           <ul class="HeaderNav__list">
             <li class="HeaderNav__item">
-              <router-link class="HeaderNav__link" to="/hash">Hash</router-link>
+              <router-link
+                class="HeaderNav__link"
+                to="/hash"
+                @click="showMobileDialog = false"
+                >Hash</router-link
+              >
             </li>
             <li class="HeaderNav__item">
-              <router-link class="HeaderNav__link" to="/block"
+              <router-link
+                class="HeaderNav__link"
+                to="/block"
+                @click="showMobileDialog = false"
                 >Block</router-link
               >
             </li>
             <li class="HeaderNav__item">
-              <router-link class="HeaderNav__link" to="/blockchain"
+              <router-link
+                class="HeaderNav__link"
+                to="/blockchain"
+                @click="showMobileDialog = false"
                 >Blockchain</router-link
               >
             </li>
             <li class="HeaderNav__item">
-              <router-link class="HeaderNav__link" to="/coin"
+              <router-link
+                class="HeaderNav__link"
+                to="/coin"
+                @click="showMobileDialog = false"
                 >Coinbase</router-link
               >
             </li>
@@ -183,6 +197,7 @@ function setTheme() {
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 5;
   background-color: transparent;
   &__container {
     max-width: var(--layoutWidth);
