@@ -33,7 +33,7 @@ provide("screen", screen);
 @import "./assets/scss/const.scss";
 
 #app {
-  font-family: Inter, Raleway;
+  font-family: Inter, Raleway, JetBrainsMono;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

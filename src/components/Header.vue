@@ -183,7 +183,6 @@ function setTheme() {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 5;
   background-color: transparent;
   &__container {
     max-width: var(--layoutWidth);
@@ -290,11 +289,11 @@ function setTheme() {
 
 // animation
 .moveInOut-enter-active {
-  animation: moveIn 0.25s var(--mainCubic);
+  animation: moveIn var(--revealDuration) var(--mainCubic);
   backface-visibility: hidden;
 }
 .moveInOut-leave-active {
-  animation: moveOut 0.25s var(--mainCubic);
+  animation: moveOut var(--revealDuration) var(--mainCubic);
   backface-visibility: hidden;
 }
 @keyframes moveIn {

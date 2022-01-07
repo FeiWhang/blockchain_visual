@@ -46,6 +46,82 @@ textarea {
     align-items: center;
     justify-content: start;
   }
+  &__showCon {
+    color: var(--mainColor23);
+    padding: var(--buttonPaddingS);
+    background-color: var(--mainColor5);
+    border-radius: var(--radiusS);
+    transition: var(--buttonHoverTransition);
+    font-size: var(--fontXS);
+    &:hover {
+      box-shadow: 4px 5px 4px var(--mainColor15);
+      transform: translate3d(-1px, -2px, 0);
+    }
+  }
+}
+.SectionConcept {
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000, $alpha: 0.75);
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 var(--layoutPadding);
+    margin-bottom: var(--headerHeight);
+    padding: 32px;
+    background-color: var(--mainColor1);
+    border-radius: var(--radiusM);
+    color: var(--mainColor22);
+    font-size: var(--fontR);
+    line-height: var(--gapL);
+    max-width: 720px;
+    box-shadow: 8px 8px 12px var(--mainColor5);
+    animation: fadeInScaleAngle var(--revealDuration) var(--mainCubic) forwards;
+    transform-origin: top left;
+    &--close {
+      animation: fadeOutScaleAngle var(--revealDuration) var(--mainCubic)
+        forwards;
+      transform-origin: bottom right;
+    }
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    column-gap: var(--gapS);
+    svg {
+      width: var(--fontM);
+      path {
+        fill: var(--mainColor18);
+      }
+    }
+  }
+  &__close {
+    width: 24px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    path {
+      fill: var(--mainColor22);
+    }
+  }
+}
+.fadeInOut-enter-active {
+  animation: fadeIn var(--revealDuration) var(--mainCubic);
+  backface-visibility: hidden;
+}
+.fadeInOut-leave-active {
+  animation: fadeOut var(--hoverTransitionDuration) var(--mainCubic);
+  backface-visibility: hidden;
 }
 
 .Cta {

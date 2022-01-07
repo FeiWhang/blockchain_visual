@@ -94,10 +94,6 @@
     --sectionPadding: 102px;
     --headerHeight: 72px;
     --headerLogoWidth: 32px;
-    --fontXXS: 14px;
-    --fontXS: 15px;
-    --fontS: 16px;
-    --fontR: 18px;
     --fontM: 22px;
     --fontL: 34px;
   }
@@ -105,14 +101,11 @@
     --sectionPadding: 84px;
     --headerHeight: 64px;
     --headerLogoWidth: 36px;
-    --fontXXS: 13px;
-    --fontXS: 14px;
-    --fontS: 15px;
-    --fontR: 16px;
     --fontM: 20px;
     --fontL: 32px;
   }
   &--xs {
+    --layoutPadding: 24px;
     --sectionPadding: 72px;
     --headerHeight: 64px;
     --headerLogoWidth: 32px;
@@ -126,6 +119,24 @@
 }
 
 // animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes fadeInAngle {
   from {
     transform: translate3d(-4.96px, -2px, 0);
@@ -151,5 +162,27 @@
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInScaleAngle {
+  from {
+    transform: scale(0.88) translate3d(-25px, -10px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutScaleAngle {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.88) translate3d(-25px, -10px, 0);
+    opacity: 0;
   }
 }

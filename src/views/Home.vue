@@ -243,6 +243,7 @@ onMounted(() => {
     background-color: var(--mainColor5);
     color: var(--mainColor23);
     opacity: 0;
+    backface-visibility: hidden;
     animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
         calc(var(--revealDuration) * 2) forwards,
       hovering 0.88s var(--mainCubic)
