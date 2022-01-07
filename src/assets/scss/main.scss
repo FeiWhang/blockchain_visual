@@ -44,6 +44,73 @@ textarea {
     align-items: center;
     justify-content: start;
   }
+  &__subtitle {
+    font-size: var(--fontS);
+    font-weight: 600;
+    color: var(--mainColor8);
+    opacity: 0;
+    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+      calc(var(--revealDuration)) forwards;
+  }
+  &__title {
+    font-size: var(--fontL);
+    color: var(--mainColor1);
+    margin-top: var(--gapM);
+    margin-bottom: calc(var(--sectionPadding) * 0.5);
+    opacity: 0;
+    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+      calc(var(--revealDuration) * 1.5) forwards;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--gapL);
+  }
+  &__label {
+    font-family: Inter;
+    font-size: var(--fontR);
+    color: var(--mainColor1);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    column-gap: var(--gapS);
+    svg {
+      width: var(--fontR);
+      path {
+        fill: var(--mainColor3);
+      }
+    }
+  }
+  &__input {
+    font-family: Inter;
+    font-size: var(--fontS);
+    background-color: var(--mainColor21);
+    color: var(--mainColor2);
+    padding: var(--buttonPadding);
+    border-radius: var(--radiusS);
+    transition: box-shadow var(--revealDuration) var(--mainCubic);
+    letter-spacing: 0.5px;
+    &:focus {
+      box-shadow: 0 0 6px var(--mainColor16);
+    }
+    &--placeholder {
+      cursor: not-allowed;
+    }
+  }
+  &__inputContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--gapS);
+  }
+  &__inputStatus {
+    display: flex;
+    margin-left: var(--gapM);
+    span {
+      font-size: var(--fontXXS);
+      color: var(--mainColor2);
+      animation: fadeInAngle var(--revealDuration) var(--mainCubic) forwards;
+    }
+  }
   &__showCon {
     color: var(--mainColor23);
     background-color: var(--mainColor5);
@@ -76,7 +143,7 @@ textarea {
     background-color: var(--mainColor1);
     border-radius: var(--radiusM);
     color: var(--mainColor22);
-    font-size: var(--fontR);
+    font-size: var(--fontS);
     line-height: var(--gapL);
     max-width: 720px;
     box-shadow: 8px 8px 12px var(--mainColor5);
@@ -91,6 +158,7 @@ textarea {
     display: flex;
     align-items: center;
     column-gap: var(--gapS);
+    font-size: var(--fontL);
     svg {
       width: var(--fontL);
       path {
@@ -113,7 +181,7 @@ textarea {
     width: 100%;
     transition: var(--bgTransition);
     background-color: var(--mainColor2);
-    font-size: var(--fontS);
+    font-size: var(--fontXS);
     color: var(--mainColor23);
     &:hover {
       background-color: var(--mainColor3);

@@ -56,11 +56,12 @@
   --mainColor8: #51c7f6;
   --mainColor7: #64cdf7;
   --mainColor6: #77d3f8;
-  --mainColor5: #8bdaf9;
-  --mainColor4: #9ee0fa;
-  --mainColor3: #b1e6fb;
-  --mainColor2: #d5f2ff;
+  --mainColor5: #a9e7ff;
+  --mainColor4: #b4eaff;
+  --mainColor3: #cceefc;
+  --mainColor2: #ddf3fd;
   --mainColor1: #ecf9fe;
+  --redInput: #8a050c;
   &--dark {
     --yellow: #b7b5a5;
     --mainColor1: #010e13;
@@ -81,11 +82,12 @@
     --mainColor16: #51c7f6;
     --mainColor17: #64cdf7;
     --mainColor18: #77d3f8;
-    --mainColor19: #8bdaf9;
-    --mainColor20: #9ee0fa;
-    --mainColor21: #b1e6fb;
-    --mainColor22: #d5f2ff;
+    --mainColor19: #a9e7ff;
+    --mainColor20: #b4eaff;
+    --mainColor21: #cceefc;
+    --mainColor22: #ddf3fd;
     --mainColor23: #ecf9fe;
+    --redInput: #fdc4c7;
   }
   &--lg {
     --layoutWidth: var(--layoutWidthMax);

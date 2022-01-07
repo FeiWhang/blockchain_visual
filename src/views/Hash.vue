@@ -19,11 +19,11 @@ function onDataChange() {
 <template>
   <section class="Section Hash">
     <div class="Section__container Hash__container">
-      <p class="Hash__subtitle">Step 1</p>
-      <h2 class="Hash__title">Hash</h2>
-      <form @submit.prevent class="Hash__form">
-        <div class="Hash__inputContainer">
-          <label for="hash" class="Hash__label Hash__label--hash"
+      <p class="Section__subtitle">Step 1</p>
+      <h2 class="Section__title">Hash</h2>
+      <form @submit.prevent class="Section__form">
+        <div class="Section__inputContainer">
+          <label for="hash" class="Section__label Hash__label Hash__label--hash"
             ><svg
               viewBox="0 0 32 32"
               fill="none"
@@ -36,12 +36,15 @@ function onDataChange() {
             </svg>
             SHA256 Hash</label
           >
-          <div class="Hash__input Hash__input--placeholder">
+          <div
+            name="hash"
+            class="Section__input Section__input--placeholder Hash__input Hash__input--hash"
+          >
             <p class="Hash__placeholder" :key="hash">
               {{ hash }}
             </p>
           </div>
-          <label for="hash" class="Hash__status"
+          <label for="hash" class="Section__inputStatus Hash__inputStatus"
             ><svg
               viewBox="0 0 16 16"
               fill="none"
@@ -57,8 +60,11 @@ function onDataChange() {
             <span :key="status">{{ status }}</span></label
           >
         </div>
-        <div class="Hash__inputContainer">
-          <label for="data" class="Hash__label Hash__label--data">
+        <div class="Section__inputContainer">
+          <label
+            for="data"
+            class="Section__label Hash__label Hash__label--data"
+          >
             <svg
               viewBox="0 0 32 32"
               fill="none"
@@ -77,14 +83,13 @@ function onDataChange() {
                 fill="black"
               />
             </svg>
-
             Data</label
           >
           <textarea
             name="data"
             id=""
             rows="5"
-            class="Hash__input"
+            class="Section__input Hash__input Hash__input--data"
             @keyup="onDataChange"
             v-model="data"
           ></textarea>
@@ -205,42 +210,7 @@ function onDataChange() {
 
 <style lang="scss" scoped>
 .Hash {
-  &__subtitle {
-    font-size: var(--fontS);
-    font-weight: 600;
-    color: var(--mainColor8);
-    opacity: 0;
-    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
-      calc(var(--revealDuration)) forwards;
-  }
-  &__title {
-    font-size: var(--fontL);
-    color: var(--mainColor1);
-    margin-top: var(--gapM);
-    margin-bottom: calc(var(--sectionPadding) * 0.5);
-    opacity: 0;
-    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
-      calc(var(--revealDuration) * 1.5) forwards;
-  }
-  &__form {
-    display: flex;
-    flex-direction: column;
-    row-gap: var(--gapL);
-  }
   &__label {
-    font-family: Inter;
-    font-size: var(--fontR);
-    color: var(--mainColor1);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    column-gap: var(--gapS);
-    svg {
-      width: var(--fontR);
-      path {
-        fill: var(--mainColor3);
-      }
-    }
     opacity: 0;
     &--hash {
       animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
@@ -251,52 +221,26 @@ function onDataChange() {
         calc(var(--revealDuration) * 3) forwards;
     }
   }
-  &__inputContainer {
-    display: flex;
-    flex-direction: column;
-    row-gap: var(--gapS);
-  }
   &__input {
-    font-family: Inter;
-    font-size: var(--fontS);
-    background-color: var(--mainColor22);
-    color: var(--mainColor2);
-    padding: var(--buttonPadding);
-    border-radius: var(--radiusS);
-    transition: box-shadow var(--revealDuration) var(--mainCubic);
-    letter-spacing: 0.5px;
     width: clamp(
       var(--minWidth) - var(--layoutPadding) * 2,
       calc(100vw - var(--layoutPadding) * 2),
       720px
     );
-    opacity: 0;
-    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
-      calc(var(--revealDuration) * 3.5) forwards;
-    &:focus {
-      box-shadow: 0 0 6px var(--mainColor16);
-    }
-    &--placeholder {
+    &--hash {
       background-color: var(--mainColor21);
-      cursor: not-allowed;
+      opacity: 0;
       animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
         calc(var(--revealDuration) * 2.5) forwards;
     }
+    &--data {
+      background-color: var(--mainColor22);
+      opacity: 0;
+      animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+        calc(var(--revealDuration) * 3.5) forwards;
+    }
   }
-  &__placeholder {
-    animation: morph 0.15s linear forwards;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-family: JetBrainsMono;
-    font-size: var(--fontS);
-    letter-spacing: 1px;
-  }
-  &__status {
-    display: flex;
-    margin-left: var(--gapM);
-    opacity: 0;
-    animation: fadeInAngle var(--revealDuration) var(--mainCubic)
-      calc(var(--revealDuration) * 5.5) forwards;
+  &__inputStatus {
     svg {
       margin-right: var(--gapS);
       width: var(--fontR);
@@ -304,12 +248,17 @@ function onDataChange() {
         fill: var(--mainColor5);
       }
     }
-    span {
-      font-size: var(--fontXS);
-      color: var(--mainColor3);
-      animation: fadeInAngle var(--revealDuration) var(--mainCubic) forwards;
-    }
+    opacity: 0;
+    animation: fadeInAngle var(--revealDuration) var(--mainCubic)
+      calc(var(--revealDuration) * 5.5) forwards;
   }
+  &__placeholder {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: JetBrainsMono;
+    letter-spacing: 1px;
+  }
+
   &__showCon {
     margin-top: var(--gapXL);
     opacity: 0;
@@ -321,41 +270,15 @@ function onDataChange() {
 .HashConcept {
   &__item {
     display: flex;
-    flex-direction: column;
-    column-gap: var(--gapR);
+    column-gap: var(--gapS);
     margin: var(--gapS) 0;
-    p {
-      &::before {
-        content: "";
-        height: var(--fontXS);
-        margin-right: 12px;
-        border: 1px solid var(--mainColor9);
-        border-radius: 4px;
-      }
-    }
     svg {
-      width: var(--fontL);
+      width: var(--fontM);
       margin-bottom: 4px;
       path {
         fill: var(--mainColor18);
       }
     }
-  }
-}
-
-// animations
-@keyframes morph {
-  0% {
-    filter: blur(0.25px);
-    opacity: 1;
-  }
-  50% {
-    filter: blur(1px);
-    opacity: 0.25;
-  }
-  100% {
-    filter: none;
-    opacity: 1;
   }
 }
 </style>
