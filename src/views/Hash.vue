@@ -241,13 +241,6 @@ function onDataChange() {
     }
   }
   &__inputStatus {
-    svg {
-      margin-right: var(--gapS);
-      width: var(--fontR);
-      path {
-        fill: var(--mainColor5);
-      }
-    }
     opacity: 0;
     animation: fadeInAngle var(--revealDuration) var(--mainCubic)
       calc(var(--revealDuration) * 5.5) forwards;
@@ -270,6 +263,7 @@ function onDataChange() {
 .HashConcept {
   &__item {
     display: flex;
+    align-items: center;
     column-gap: var(--gapS);
     margin: var(--gapS) 0;
     svg {

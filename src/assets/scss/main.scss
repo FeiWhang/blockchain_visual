@@ -104,11 +104,19 @@ textarea {
   }
   &__inputStatus {
     display: flex;
+    align-items: center;
     margin-left: var(--gapM);
     span {
       font-size: var(--fontXXS);
       color: var(--mainColor2);
       animation: fadeInAngle var(--revealDuration) var(--mainCubic) forwards;
+    }
+    svg {
+      margin-right: var(--gapS);
+      width: var(--fontR);
+      path {
+        fill: var(--mainColor5);
+      }
     }
   }
   &__showCon {
