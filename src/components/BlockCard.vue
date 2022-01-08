@@ -1,17 +1,39 @@
 <script setup lang="ts">
 import { Block } from "@/composables/blockchain";
-import { Ref, ref } from "vue";
+import { Ref, ref, onBeforeMount } from "vue";
+import LoadingBlock from "@/components/LoadingBlock.vue";
+import LoadingCircle from "@/components/LoadingCircle.vue";
 
 const props = defineProps({
   index: Number,
+  animDelay: Number,
 });
 
-const block: Ref<Block> = ref(new Block(props.index ?? 1));
-const status: Ref<string> = ref<string>("Valid hash starts with 000.");
+const block = ref(new Block(1)) as Ref<Block>;
+onBeforeMount(async () => {
+  await block.value.mine();
+});
+const status: Ref<string> = ref<string>("Valid hash starts with 0000.");
+
+const isMining = ref(false) as Ref<boolean>;
+function onMineClicked() {
+  if (block.value.isValidHash()) return;
+  isMining.value = true;
+  setTimeout(async () => {
+    await block.value.mine();
+    isMining.value = false;
+  }, 1000);
+}
 </script>
 
 <template>
-  <div class="BlockCard">
+  <div
+    class="BlockCard"
+    :style="{
+      'animation-delay':
+        'calc(var(--revealDuration) * ' + props.animDelay + ')',
+    }"
+  >
     <div class="BlockCard__header">
       <p class="BlockCard__index">
         Block #{{ block.index }} <br />
@@ -84,11 +106,11 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
               fill="black"
             />
           </svg>
-          {{ block.timestamp.toLocaleString() }}</span
+          {{ block.timestamp.toLocaleString("en-US", { hour12: false }) }}</span
         >
       </p>
       <p
-        class="BlockCard__nounce"
+        class="BlockCard__nounce Section__placeholder"
         title="nounce"
         :style="{
           'background-color': block.isValidHash()
@@ -96,14 +118,15 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
             : 'var(--redInput)',
         }"
       >
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 36 42" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
-            d="M6 40.3846V7.15385C6.00004 6.30015 6.26312 5.4672 6.75343 4.76834C7.24374 4.06949 7.93747 3.53868 8.74021 3.24815C9.54295 2.95762 10.4157 2.92148 11.2397 3.14465C12.0637 3.36782 12.799 3.83946 13.3454 4.49538L33.6923 28.9103V7.15385C33.6923 6.05218 34.1299 4.99563 34.9089 4.21663C35.6879 3.43764 36.7445 3 37.8462 3C38.9478 3 40.0044 3.43764 40.7834 4.21663C41.5624 4.99563 42 6.05218 42 7.15385V40.3846C42 41.2383 41.7369 42.0713 41.2466 42.7701C40.7563 43.469 40.0625 43.9998 39.2598 44.2903C38.457 44.5808 37.5843 44.617 36.7603 44.3938C35.9363 44.1706 35.201 43.699 34.6546 43.0431L14.3077 18.6268V40.3846C14.3077 40.9301 14.2003 41.4703 13.9915 41.9742C13.7827 42.4782 13.4768 42.9361 13.0911 43.3218C12.7053 43.7075 12.2474 44.0135 11.7435 44.2223C11.2395 44.431 10.6993 44.5385 10.1538 44.5385C9.60836 44.5385 9.06821 44.431 8.56424 44.2223C8.06027 44.0135 7.60235 43.7075 7.21663 43.3218C6.83091 42.9361 6.52494 42.4782 6.31619 41.9742C6.10744 41.4703 6 40.9301 6 40.3846V40.3846ZM8.76923 7.15385V40.3846C8.76923 40.7518 8.91511 41.104 9.17478 41.3637C9.43444 41.6234 9.78662 41.7692 10.1538 41.7692C10.5211 41.7692 10.8733 41.6234 11.1329 41.3637C11.3926 41.104 11.5385 40.7518 11.5385 40.3846V14.8025C11.5386 14.518 11.6263 14.2405 11.7897 14.0077C11.9532 13.7748 12.1843 13.598 12.4518 13.5011C12.7193 13.4043 13.0101 13.3922 13.2846 13.4665C13.5592 13.5408 13.8043 13.6978 13.9865 13.9163L36.7828 41.2708C36.9649 41.4892 37.21 41.6463 37.4846 41.7206C37.7592 41.7948 38.05 41.7828 38.3174 41.6859C38.5849 41.5891 38.8161 41.4123 38.9795 41.1794C39.1429 40.9466 39.2306 40.6691 39.2308 40.3846V7.15385C39.2308 6.78662 39.0849 6.43444 38.8252 6.17478C38.5656 5.91511 38.2134 5.76923 37.8462 5.76923C37.4789 5.76923 37.1267 5.91511 36.8671 6.17478C36.6074 6.43444 36.4615 6.78662 36.4615 7.15385V32.736C36.4614 33.0205 36.3737 33.298 36.2103 33.5308C36.0468 33.7636 35.8157 33.9405 35.5482 34.0373C35.2807 34.1341 34.9899 34.1462 34.7154 34.0719C34.4408 33.9977 34.1957 33.8406 34.0135 33.6222L11.2172 6.26769L12.2806 5.38154L11.2172 6.26769C11.035 6.04923 10.79 5.89218 10.5154 5.8179C10.2408 5.74361 9.95003 5.75571 9.68256 5.85253C9.41508 5.94935 9.18392 6.12621 9.02051 6.35904C8.85709 6.59187 8.76936 6.86939 8.76923 7.15385Z"
+            d="M0 37.3846V4.15385C4.26078e-05 3.30015 0.26312 2.4672 0.753431 1.76834C1.24374 1.06949 1.93747 0.538681 2.74021 0.248151C3.54295 -0.0423789 4.41571 -0.0785185 5.23972 0.144651C6.06374 0.367821 6.79898 0.83946 7.34539 1.49538L27.6923 25.9103V4.15385C27.6923 3.05218 28.1299 1.99563 28.9089 1.21663C29.6879 0.437636 30.7445 0 31.8462 0C32.9478 0 34.0044 0.437636 34.7834 1.21663C35.5624 1.99563 36 3.05218 36 4.15385V37.3846C36 38.2383 35.7369 39.0713 35.2466 39.7701C34.7563 40.469 34.0625 40.9998 33.2598 41.2903C32.4571 41.5808 31.5843 41.617 30.7603 41.3938C29.9363 41.1706 29.201 40.699 28.6546 40.0431L8.30769 15.6268V37.3846C8.30769 37.9301 8.20025 38.4703 7.9915 38.9742C7.78275 39.4782 7.47678 39.9361 7.09106 40.3218C6.70534 40.7075 6.24742 41.0135 5.74345 41.2223C5.23949 41.431 4.69934 41.5385 4.15385 41.5385C3.60836 41.5385 3.06821 41.431 2.56424 41.2223C2.06027 41.0135 1.60235 40.7075 1.21663 40.3218C0.830913 39.9361 0.524943 39.4782 0.316192 38.9742C0.107442 38.4703 -1.14954e-08 37.9301 0 37.3846ZM2.76923 4.15385V37.3846C2.76923 37.7518 2.91511 38.104 3.17478 38.3637C3.43444 38.6234 3.78662 38.7692 4.15385 38.7692C4.52107 38.7692 4.87325 38.6234 5.13292 38.3637C5.39258 38.104 5.53846 37.7518 5.53846 37.3846V11.8025C5.53859 11.518 5.62633 11.2405 5.78974 11.0077C5.95315 10.7748 6.18432 10.598 6.45179 10.5011C6.71926 10.4043 7.01006 10.3922 7.28465 10.4665C7.55924 10.5408 7.80428 10.6978 7.98646 10.9163L30.7828 38.2708C30.9649 38.4892 31.21 38.6463 31.4846 38.7206C31.7592 38.7948 32.05 38.7827 32.3174 38.6859C32.5849 38.5891 32.8161 38.4123 32.9795 38.1794C33.1429 37.9466 33.2306 37.6691 33.2308 37.3846V4.15385C33.2308 3.78662 33.0849 3.43444 32.8252 3.17478C32.5656 2.91511 32.2134 2.76923 31.8462 2.76923C31.4789 2.76923 31.1267 2.91511 30.8671 3.17478C30.6074 3.43444 30.4615 3.78662 30.4615 4.15385V29.736C30.4614 30.0205 30.3737 30.298 30.2103 30.5308C30.0468 30.7636 29.8157 30.9405 29.5482 31.0373C29.2807 31.1341 28.9899 31.1462 28.7154 31.0719C28.4408 30.9977 28.1957 30.8406 28.0135 30.6222L5.21723 3.26769L6.28062 2.38154L5.21723 3.26769C5.03505 3.04923 4.79001 2.89218 4.51542 2.8179C4.24083 2.74361 3.95003 2.75571 3.68256 2.85253C3.41508 2.94935 3.18392 3.12621 3.02051 3.35904C2.85709 3.59187 2.76936 3.86939 2.76923 4.15385Z"
             fill="black"
           />
         </svg>
+
         {{ block.nounce }}
       </p>
     </div>
@@ -130,7 +153,7 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
               : 'var(--redInput)',
           }"
         >
-          <p class="BlockCard__placeholder" :key="block.hash">
+          <p class="Section__placeholder" :key="block.hash">
             {{ block.hash }}
           </p>
         </div>
@@ -179,7 +202,7 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
           name="data"
           id=""
           rows="5"
-          class="Section__input BlockCard__input"
+          class="Section__input BlockCard__input BlockCard__input--data"
           @keyup="block.onDataChange()"
           v-model="block.data"
         ></textarea>
@@ -188,9 +211,15 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
     <button
       class="Cta BlockCard__mine"
       :class="block.isValidHash() ? 'BlockCard__mine--disabled' : ''"
-      @click="block.mine"
+      :style="{
+        'background-color': block.isValidHash()
+          ? 'var(--grey)'
+          : 'var(--mainColor5)',
+      }"
+      @click="onMineClicked"
     >
-      Mine
+      <p v-if="!isMining">Mine</p>
+      <LoadingCircle v-if="isMining" />
     </button>
   </div>
 </template>
@@ -208,6 +237,9 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
     calc(100vw - var(--layoutPadding) * 2),
     784px
   );
+  opacity: 0;
+  animation: fadeScaleInFromAbove var(--revealDuration) var(--mainCubic)
+    forwards;
   &__header {
     display: flex;
     align-items: center;
@@ -217,7 +249,7 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
   &__index {
     font-size: var(--fontM);
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   }
   &__timestamp {
     font-size: var(--fontXXS);
@@ -245,7 +277,7 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
     color: var(--mainColor3);
     cursor: not-allowed;
     svg {
-      width: var(--fontS);
+      width: var(--fontXXS);
       path {
         fill: var(--mainColor3);
       }
@@ -254,28 +286,30 @@ const status: Ref<string> = ref<string>("Valid hash starts with 000.");
   &__form {
     margin-top: var(--gapM);
   }
+  &__input {
+    &--hash {
+      background-color: var(--mainColor21);
+    }
+    &--data {
+      background-color: var(--mainColor20);
+    }
+  }
   &__inputContainer {
     display: flex;
     flex-direction: column;
     column-gap: var(--gapM);
   }
-  &__inputStatus {
-  }
-  &__placeholder {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-family: JetBrainsMono;
-    font-size: var(--fontS);
-    letter-spacing: 1px;
-  }
   &__mine {
     display: flex;
     align-items: center;
+    justify-content: center;
     column-gap: var(--gapS);
-    background-color: var(--mainColor6);
     padding: var(--buttonPaddingM);
     color: var(--mainColor22);
     align-self: center;
+    width: 128px;
+    height: 48px;
+    transition: all var(--hoverDuration) var(--mainCubic);
     svg {
       width: var(--fontR);
       path {

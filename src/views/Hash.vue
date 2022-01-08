@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { inject, Ref, ref } from "vue";
 import { getHash } from "@/composables/blockchain";
+import { myScreen } from "@/composables/screen";
 
+const screen: myScreen = inject("screen") as myScreen;
 const data: Ref<string> = ref<string>("");
 const hash: Ref<string> = ref<string>(
   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -40,7 +42,7 @@ function onDataChange() {
             name="hash"
             class="Section__input Section__input--placeholder Hash__input Hash__input--hash"
           >
-            <p class="Hash__placeholder" :key="hash">
+            <p class="Section__placeholder" :key="hash">
               {{ hash }}
             </p>
           </div>
@@ -131,14 +133,15 @@ function onDataChange() {
               <br />
               <p>
                 A hash <span id="HighLightSpan"> is</span> a function to
-                converts any data into an encrypted output.
-              </p>
-              <p>
-                A hash <span id="HighLightSpan">looks like</span> a bunch of
-                random letters and numbers.
+                converts any data into an encrypted output. It
+                <span id="HighLightSpan">looks like</span> a bunch of random
+                letters and numbers.
               </p>
               <br />
-              <div class="HashConcept__item">
+              <div
+                class="HashConcept__item"
+                :class="'HashConcept__item--' + screen.type"
+              >
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -156,7 +159,10 @@ function onDataChange() {
                   <span id="HighLightSpan">same hash.</span>
                 </p>
               </div>
-              <div class="HashConcept__item">
+              <div
+                class="HashConcept__item"
+                :class="'HashConcept__item--' + screen.type"
+              >
                 <svg
                   viewBox="0 0 20 20"
                   fill="none"
@@ -172,7 +178,10 @@ function onDataChange() {
                   <span id="HighLightSpan"> hash back to data.</span>
                 </p>
               </div>
-              <div class="HashConcept__item">
+              <div
+                class="HashConcept__item"
+                :class="'HashConcept__item--' + screen.type"
+              >
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -228,13 +237,11 @@ function onDataChange() {
       720px
     );
     &--hash {
-      background-color: var(--mainColor21);
       opacity: 0;
       animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
         calc(var(--revealDuration) * 2.5) forwards;
     }
     &--data {
-      background-color: var(--mainColor22);
       opacity: 0;
       animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
         calc(var(--revealDuration) * 3.5) forwards;
@@ -245,13 +252,6 @@ function onDataChange() {
     animation: fadeInAngle var(--revealDuration) var(--mainCubic)
       calc(var(--revealDuration) * 5.5) forwards;
   }
-  &__placeholder {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-family: JetBrainsMono;
-    letter-spacing: 1px;
-  }
-
   &__showCon {
     margin-top: var(--gapXL);
     opacity: 0;
@@ -261,17 +261,35 @@ function onDataChange() {
 }
 
 .HashConcept {
+  &__card {
+    max-width: 540px;
+  }
   &__item {
     display: flex;
+    flex-direction: row;
     align-items: center;
     column-gap: var(--gapS);
     margin: var(--gapS) 0;
+    p {
+      text-indent: calc(var(--gapS) + 2px) hanging;
+      &::before {
+        content: "";
+        border-radius: 4px;
+        border: 1px solid var(--mainColor19);
+        margin-right: var(--gapS);
+      }
+    }
     svg {
-      width: var(--fontM);
-      margin-bottom: 4px;
+      width: var(--gapL);
       path {
         fill: var(--mainColor18);
       }
+    }
+    &--xs {
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: var(--gapS);
+      margin: var(--gapM) 0;
     }
   }
 }

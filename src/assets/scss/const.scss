@@ -7,9 +7,9 @@
   --guideCardWidth: 296px;
   --layoutPadding: 32px;
   --innerPadding: 12px;
-  --buttonPaddingM: 12px 32px;
-  --buttonPadding: 10px 20px;
-  --buttonPaddingS: 8px 16px;
+  --buttonPaddingM: 12px 30px;
+  --buttonPadding: 10px 18px;
+  --buttonPaddingS: 8px 14px;
   --sectionPadding: 128px;
   --sectionHeightMax: 1080px;
   --headerHeight: 84px;
@@ -31,64 +31,62 @@
   --mainSkew: -6.9deg;
   --mainCubic: cubic-bezier(0.22, 0.61, 0.36, 1);
   --revealDuration: 0.3s;
-  --hoverTransitionDuration: 0.15s;
-  --buttonHoverTransition: box-shadow var(--hoverTransitionDuration)
-      var(--mainCubic),
-    transform var(--hoverTransitionDuration) var(--mainCubic);
-  --colorTransition: color var(--hoverTransitionDuration) var(--mainCubic);
-  --bgTransition: background-color var(--hoverTransitionDuration)
-    var(--mainCubic);
-  --yellow: #fffde9;
-  --mainColor23: #010e13;
-  --mainColor22: #021c27;
-  --mainColor21: #032a3a;
-  --mainColor20: #04394e;
-  --mainColor19: #054761;
-  --mainColor18: #065574;
-  --mainColor17: #076388;
-  --mainColor16: #08719b;
-  --mainColor15: #0980ae;
-  --mainColor14: #0a8ec2;
-  --mainColor13: #0b9cd5;
+  --hoverDuration: 0.15s;
+  --buttonHoverTransition: box-shadow var(--hoverDuration) var(--mainCubic),
+    transform var(--hoverDuration) var(--mainCubic);
+  --colorTransition: color var(--hoverDuration) var(--mainCubic);
+  --bgTransition: background-color var(--hoverDuration) var(--mainCubic);
+  --mainColor1: #010e13;
+  --mainColor2: #021c27;
+  --mainColor3: #032a3a;
+  --mainColor4: #04394e;
+  --mainColor5: #054761;
+  --mainColor6: #065574;
+  --mainColor7: #076388;
+  --mainColor8: #08719b;
+  --mainColor9: #0980ae;
+  --mainColor10: #0a8ec2;
+  --mainColor11: #0b9cd5;
   --mainColor: #0caae9;
-  --mainColor11: #16b4f3;
-  --mainColor10: #2abbf4;
-  --mainColor9: #3dc1f5;
-  --mainColor8: #51c7f6;
-  --mainColor7: #64cdf7;
-  --mainColor6: #77d3f8;
-  --mainColor5: #a9e7ff;
-  --mainColor4: #b4eaff;
-  --mainColor3: #cceefc;
-  --mainColor2: #ddf3fd;
-  --mainColor1: #ecf9fe;
-  --redInput: #8a050c;
+  --mainColor13: #16b4f3;
+  --mainColor14: #2abbf4;
+  --mainColor15: #3dc1f5;
+  --mainColor16: #51c7f6;
+  --mainColor17: #64cdf7;
+  --mainColor18: #77d3f8;
+  --mainColor19: #b3e9ff;
+  --mainColor20: #cfeefc;
+  --mainColor21: #d5f2ff;
+  --mainColor22: #e6f8ff;
+  --mainColor23: #f3fafd;
+  --redInput: #fdc4c7;
+  --grey: #b9c7ce;
   &--dark {
-    --yellow: #b7b5a5;
-    --mainColor1: #010e13;
-    --mainColor2: #021c27;
-    --mainColor3: #032a3a;
-    --mainColor4: #04394e;
-    --mainColor5: #054761;
-    --mainColor6: #065574;
-    --mainColor7: #076388;
-    --mainColor8: #08719b;
-    --mainColor9: #0980ae;
-    --mainColor10: #0a8ec2;
-    --mainColor11: #0b9cd5;
+    --mainColor23: #010e13;
+    --mainColor22: #021c27;
+    --mainColor21: #032a3a;
+    --mainColor20: #04394e;
+    --mainColor19: #054761;
+    --mainColor18: #065574;
+    --mainColor17: #076388;
+    --mainColor16: #08719b;
+    --mainColor15: #0980ae;
+    --mainColor14: #0a8ec2;
+    --mainColor13: #0b9cd5;
     --mainColor: #0caae9;
-    --mainColor13: #16b4f3;
-    --mainColor14: #2abbf4;
-    --mainColor15: #3dc1f5;
-    --mainColor16: #51c7f6;
-    --mainColor17: #64cdf7;
-    --mainColor18: #77d3f8;
-    --mainColor19: #a9e7ff;
-    --mainColor20: #b4eaff;
-    --mainColor21: #cceefc;
-    --mainColor22: #ddf3fd;
-    --mainColor23: #ecf9fe;
-    --redInput: #fdc4c7;
+    --mainColor11: #16b4f3;
+    --mainColor10: #2abbf4;
+    --mainColor9: #3dc1f5;
+    --mainColor8: #51c7f6;
+    --mainColor7: #64cdf7;
+    --mainColor6: #77d3f8;
+    --mainColor5: #b3e9ff;
+    --mainColor4: #cfeefc;
+    --mainColor3: #d5f2ff;
+    --mainColor2: #e6f8ff;
+    --mainColor1: #f3fafd;
+    --redInput: #8a050c;
+    --grey: #565c5f;
   }
   &--lg {
     --layoutWidth: var(--layoutWidthMax);
@@ -104,20 +102,32 @@
     --sectionPadding: 84px;
     --headerHeight: 64px;
     --headerLogoWidth: 36px;
+    --fontXXS: 13px;
+    --fontXS: 14px;
+    --fontS: 15px;
+    --fontR: 16px;
     --fontM: 20px;
     --fontL: 32px;
   }
   &--xs {
     --layoutPadding: 24px;
     --sectionPadding: 72px;
+    --buttonPaddingM: 10px 24px;
+    --buttonPadding: 8px 12px;
+    --buttonPaddingS: 6px 10px;
     --headerHeight: 64px;
     --headerLogoWidth: 32px;
-    --fontXXS: 13px;
-    --fontXS: 14px;
-    --fontS: 15px;
-    --fontR: 16px;
-    --fontM: 20px;
-    --fontL: 30px;
+    --fontXXS: 12px;
+    --fontXS: 13px;
+    --fontS: 14px;
+    --fontR: 15px;
+    --fontM: 18px;
+    --fontL: 32px;
+    --gapXL: 54px;
+    --gapL: 28px;
+    --gapM: 18px;
+    --gapR: 12px;
+    --gapS: 6px;
   }
 }
 
@@ -168,24 +178,13 @@
   }
 }
 
-@keyframes fadeInScaleAngle {
+@keyframes fadeScaleInFromAbove {
   from {
-    transform: scale(0.88) translate3d(-25px, -10px, 0);
     opacity: 0;
+    transform: translate3d(0, -32px, 0) scale(0.88);
   }
   to {
-    transform: scale(1) translate3d(0, 0, 0);
     opacity: 1;
-  }
-}
-
-@keyframes fadeOutScaleAngle {
-  from {
-    transform: scale(1) translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  to {
-    transform: scale(0.88) translate3d(-25px, -10px, 0);
-    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }

@@ -3,12 +3,14 @@ import { onMounted, onUnmounted, reactive } from "vue";
 export interface myScreen {
   width: number;
   type: string;
+  scroll: number;
 }
 
 export function useScreen(): myScreen {
   const screen: myScreen = reactive({
     width: window.innerWidth,
     type: getScreenType(window.innerWidth),
+    scroll: window.scrollY,
   });
 
   const onWidthChange = () => {
@@ -16,11 +18,17 @@ export function useScreen(): myScreen {
     screen.type = getScreenType(screen.width);
   };
 
+  const onScrollChange = () => {
+    screen.scroll = window.scrollY;
+  };
+
   onMounted(() => {
     window.addEventListener("resize", onWidthChange, { passive: true });
+    window.addEventListener("scroll", onScrollChange, { passive: true });
   });
   onUnmounted(() => {
     window.removeEventListener("resize", onWidthChange);
+    window.removeEventListener("scroll", onScrollChange);
   });
 
   return screen;

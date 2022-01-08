@@ -38,7 +38,7 @@ textarea {
     max-width: var(--layoutWidth);
     margin: 0 auto;
     padding: var(--sectionPadding) var(--layoutPadding);
-    height: calc(100vh - var(--headerHeight));
+    min-height: calc(100vh - var(--headerHeight));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,7 +95,14 @@ textarea {
     }
     &--placeholder {
       cursor: not-allowed;
+      background-color: var(--mainColor22);
     }
+  }
+  &__placeholder {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: JetBrainsMono;
+    letter-spacing: 1px;
   }
   &__inputContainer {
     display: flex;
@@ -139,7 +146,7 @@ textarea {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: rgba($color: #000, $alpha: 0.75);
+  background-color: rgba($color: #000, $alpha: 0.8);
   &__card {
     position: relative;
     display: flex;
@@ -151,12 +158,13 @@ textarea {
     background-color: var(--mainColor1);
     border-radius: var(--radiusM);
     color: var(--mainColor22);
+    line-height: var(--gapM);
     font-size: var(--fontS);
-    line-height: var(--gapL);
     max-width: 720px;
-    box-shadow: 8px 8px 12px var(--mainColor5);
-    animation: fadeInScaleAngle var(--revealDuration) var(--mainCubic) forwards;
-    transform-origin: top left;
+    box-shadow: var(--gapS) var(--gapS) var(--gapR) var(--mainColor5);
+    animation: fadeScaleInFromAbove var(--revealDuration) var(--mainCubic)
+      forwards;
+    transform-origin: top center;
   }
   &__cardContent {
     padding: var(--gapL);
@@ -210,7 +218,7 @@ textarea {
   backface-visibility: hidden;
 }
 .fadeInOut-leave-active {
-  animation: fadeOut var(--hoverTransitionDuration) var(--mainCubic);
+  animation: fadeOut var(--hoverDuration) var(--mainCubic);
   backface-visibility: hidden;
 }
 

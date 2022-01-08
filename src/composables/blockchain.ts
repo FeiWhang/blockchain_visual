@@ -1,7 +1,7 @@
 // MODIFIED FROM: https://github.com/anders94/blockchain-demo/blob/master/public/javascripts/blockchain.js
 import SHA256 from "crypto-js/sha256";
 
-const difficulty: number = 3; // number of 0's in the beginning of hash
+const difficulty: number = 4; // number of 0's in the beginning of hash
 const maxNounce: number = 500000; // limit nouce, prevent mineing forever
 
 export class Block {
@@ -21,10 +21,9 @@ export class Block {
     this.index = index;
     this.data = "";
     this.prevHash = prevHash ?? "";
-    this.hash = hash ?? "";
+    this.hash = hash ?? "Error";
     this.timestamp = new Date();
     this.nounce = nounce ?? 0;
-    this.mine();
   }
 
   getText(): string {
@@ -42,7 +41,7 @@ export class Block {
     return hashToTest.substring(0, difficulty) == "0".repeat(difficulty);
   }
 
-  mine() {
+  async mine() {
     if (this.isValidHash()) return;
     for (let i = 0; i <= maxNounce; i++) {
       const tmpHash = getHash(this.getText() + i);

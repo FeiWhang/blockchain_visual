@@ -14,7 +14,14 @@ function setTheme() {
 </script>
 
 <template>
-  <header class="Header" :class="'Header--' + screen.type">
+  <header
+    class="Header"
+    :class="'Header--' + screen.type"
+    :style="{
+      'background-color':
+        screen.scroll > 64 ? 'var(--mainColor22)' : 'transparent',
+    }"
+  >
     <div class="Header__container">
       <div class="Header__navContainer">
         <router-link class="Header__logo" to="/">
@@ -198,7 +205,7 @@ function setTheme() {
   left: 0;
   width: 100%;
   z-index: 5;
-  background-color: transparent;
+  transition: var(--bgTransition);
   &__container {
     max-width: var(--layoutWidth);
     margin: 0 auto;
