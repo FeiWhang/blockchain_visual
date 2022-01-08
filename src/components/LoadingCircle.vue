@@ -13,8 +13,8 @@
   box-sizing: border-box;
 }
 .LoadingCircle {
-  width: 24px;
-  height: 24px;
+  width: var(--fontM);
+  height: var(--fontM);
   border-radius: 100%;
   position: relative;
   &__circle {
@@ -23,13 +23,13 @@
     width: 100%;
     height: 100%;
     border-radius: 100%;
-    border: calc(24px / 10) solid transparent;
+    border: calc(var(--fontM) / 8) solid transparent;
     &--1 {
-      border-top-color: white;
+      border-top-color: var(--mainColor);
       animation: spinning 1.69s var(--mainCubic) infinite;
     }
     &--2 {
-      border-bottom-color: white;
+      border-bottom-color: var(--mainColor);
       animation: spinning 1.69s var(--mainCubic) infinite alternate;
     }
   }

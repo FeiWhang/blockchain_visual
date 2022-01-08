@@ -74,7 +74,7 @@ function setTheme() {
           </ul>
         </nav>
         <div class="Header__rightAction">
-          <button class="Header__theme" @click="setTheme">
+          <button class="Header__theme" @click="setTheme" title="Change theme">
             <svg
               v-if="!isDark"
               viewBox="0 0 32 32"

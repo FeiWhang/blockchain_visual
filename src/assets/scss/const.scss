@@ -60,7 +60,9 @@
   --mainColor22: #e6f8ff;
   --mainColor23: #f3fafd;
   --redInput: #fdc4c7;
+  --redError: #be474d;
   --grey: #b9c7ce;
+  --green: #2db4af;
   &--dark {
     --mainColor23: #010e13;
     --mainColor22: #021c27;
@@ -86,7 +88,9 @@
     --mainColor2: #e6f8ff;
     --mainColor1: #f3fafd;
     --redInput: #8a050c;
+    --redError: #f8676e;
     --grey: #565c5f;
+    --green: #5cd6d2;
   }
   &--lg {
     --layoutWidth: var(--layoutWidthMax);
