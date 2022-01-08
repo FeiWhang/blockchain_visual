@@ -54,20 +54,34 @@ function setTheme() {
         <nav class="HeaderNav">
           <ul class="HeaderNav__list">
             <li class="HeaderNav__item">
-              <router-link class="HeaderNav__link" to="/hash">Hash</router-link>
+              <router-link
+                class="HeaderNav__link"
+                to="/hash"
+                active-class="HeaderNav__link--active"
+                >Hash</router-link
+              >
             </li>
             <li class="HeaderNav__item">
-              <router-link class="HeaderNav__link" to="/block"
+              <router-link
+                class="HeaderNav__link"
+                to="/block"
+                active-class="HeaderNav__link--active"
                 >Block</router-link
               >
             </li>
             <li class="HeaderNav__item">
-              <router-link class="HeaderNav__link" to="/blockchain"
+              <router-link
+                class="HeaderNav__link"
+                to="/blockchain"
+                active-class="HeaderNav__link--active"
                 >Blockchain</router-link
               >
             </li>
             <li class="HeaderNav__item">
-              <router-link class="HeaderNav__link" to="/coin"
+              <router-link
+                class="HeaderNav__link"
+                to="/coin"
+                active-class="HeaderNav__link--active"
                 >Coinbase</router-link
               >
             </li>
@@ -162,6 +176,7 @@ function setTheme() {
                 class="HeaderNav__link"
                 to="/hash"
                 @click="showMobileDialog = false"
+                active-class="HeaderNav__link--active"
                 >Hash</router-link
               >
             </li>
@@ -170,6 +185,7 @@ function setTheme() {
                 class="HeaderNav__link"
                 to="/block"
                 @click="showMobileDialog = false"
+                active-class="HeaderNav__link--active"
                 >Block</router-link
               >
             </li>
@@ -178,6 +194,7 @@ function setTheme() {
                 class="HeaderNav__link"
                 to="/blockchain"
                 @click="showMobileDialog = false"
+                active-class="HeaderNav__link--active"
                 >Blockchain</router-link
               >
             </li>
@@ -186,6 +203,7 @@ function setTheme() {
                 class="HeaderNav__link"
                 to="/coin"
                 @click="showMobileDialog = false"
+                active-class="HeaderNav__link--active"
                 >Coinbase</router-link
               >
             </li>
@@ -267,6 +285,9 @@ function setTheme() {
       color: var(--mainColor1);
       &:hover {
         color: var(--mainColor);
+      }
+      &--active {
+        color: var(--mainColor7);
       }
     }
     &--mobile {

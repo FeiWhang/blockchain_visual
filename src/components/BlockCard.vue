@@ -1,45 +1,44 @@
 <script setup lang="ts">
-import { Block } from "@/composables/blockchain";
+import { Block, Chain } from "@/composables/blockchain";
 import { Ref, ref, onBeforeMount } from "vue";
 import LoadingCircle from "@/components/LoadingCircle.vue";
 
 const props = defineProps({
-  index: Number,
-  animDelay: Number,
+  block: Block,
+  chain: Chain,
 });
 
-const block = ref(new Block(1)) as Ref<Block>;
-onBeforeMount(async () => {
-  await block.value.mine();
-});
+const block = ref(props.block ?? new Block(0)) as Ref<Block>;
 const status: Ref<string> = ref<string>("Valid hash starts with 0000.");
 
 const isMining = ref(false) as Ref<boolean>;
 function onMineClicked() {
-  if (block.value.isValidHash()) return;
+  if (block.value.isHashValid()) return;
   isMining.value = true;
   setTimeout(async () => {
     await block.value.mine();
     isMining.value = false;
+    if (props.chain) props.chain.updateHash(block.value.index);
   }, 1000);
+}
+function onDataChange() {
+  if (props.chain) {
+    props.chain.updateHash(block.value.index);
+  } else {
+    block.value.reHash();
+  }
 }
 </script>
 
 <template>
-  <div
-    class="BlockCard"
-    :style="{
-      'animation-delay':
-        'calc(var(--revealDuration) * ' + props.animDelay + ')',
-    }"
-  >
+  <div class="BlockCard">
     <div class="BlockCard__header">
       <p class="BlockCard__index">
         <svg
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          v-if="block.isValidHash() && !isMining"
+          v-if="block.isHashValid() && !isMining"
         >
           <path
             d="M8 12.5L11 15.5L16 9.5"
@@ -54,12 +53,12 @@ function onMineClicked() {
             stroke-width="2"
           />
         </svg>
-        <LoadingCircle v-if="!block.isValidHash() && isMining" />
+        <LoadingCircle v-if="!block.isHashValid() && isMining" />
         <svg
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          v-if="!block.isValidHash() && !isMining"
+          v-if="!block.isHashValid() && !isMining"
         >
           <path
             d="M16.34 9.32205C16.4361 9.23249 16.5135 9.12488 16.568 9.00538C16.6225 8.88587 16.6529 8.75681 16.6575 8.62555C16.6621 8.4943 16.6408 8.36342 16.5948 8.2404C16.5488 8.11737 16.4791 8.00461 16.3895 7.90855C16.2999 7.81249 16.1923 7.73501 16.0728 7.68053C15.9533 7.62605 15.8243 7.59565 15.693 7.59105C15.5617 7.58646 15.4309 7.60776 15.3078 7.65374C15.1848 7.69972 15.0721 7.76949 14.976 7.85905L12.05 10.587L9.322 7.66005C9.13947 7.47309 8.89101 7.36501 8.62979 7.35891C8.36858 7.35282 8.11535 7.44921 7.92431 7.62745C7.73326 7.8057 7.61956 8.05164 7.60754 8.31265C7.59552 8.57366 7.68614 8.829 7.86 9.02405L10.588 11.95L7.661 14.6781C7.56154 14.7667 7.48081 14.8743 7.42353 14.9946C7.36625 15.1149 7.33359 15.2454 7.32746 15.3785C7.32134 15.5116 7.34187 15.6446 7.38785 15.7696C7.43383 15.8947 7.50433 16.0093 7.59522 16.1067C7.68611 16.2041 7.79554 16.2824 7.9171 16.3369C8.03866 16.3915 8.1699 16.4212 8.30309 16.4243C8.43629 16.4274 8.56876 16.4038 8.69273 16.355C8.8167 16.3062 8.92967 16.2331 9.025 16.14L11.951 13.413L14.679 16.3391C14.7671 16.4403 14.8747 16.5229 14.9953 16.5817C15.116 16.6405 15.2472 16.6745 15.3813 16.6815C15.5153 16.6885 15.6494 16.6685 15.7756 16.6226C15.9017 16.5767 16.0173 16.5058 16.1155 16.4143C16.2137 16.3228 16.2924 16.2124 16.3471 16.0898C16.4017 15.9672 16.4311 15.8348 16.4334 15.7006C16.4358 15.5664 16.4111 15.4331 16.3609 15.3086C16.3107 15.1841 16.2359 15.071 16.141 14.976L13.414 12.05L16.34 9.32205V9.32205Z"
@@ -73,13 +72,13 @@ function onMineClicked() {
           />
         </svg>
 
-        Block #{{ block.index }} <br />
+        Block #{{ block.index == 0 ? "Genesis" : block.index }} <br />
       </p>
       <p
         class="BlockCard__nounce Section__placeholder"
         title="nounce"
         :style="{
-          'background-color': block.isValidHash()
+          'background-color': block.isHashValid()
             ? 'var(--mainColor21)'
             : 'var(--redInput)',
         }"
@@ -97,6 +96,41 @@ function onMineClicked() {
       </p>
     </div>
     <form @submit.prevent class="Section__form BlockCard__form">
+      <div class="Section__inputContainer" v-if="block.prevHash">
+        <label for="prevHash" class="Section__label BlockCard__label--prevHash">
+          <svg
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M25 13V4H23V6H20V8H23V13H20V15H28V13H25Z" fill="black" />
+            <path
+              d="M8.5 6C9.19224 6 9.86893 6.20527 10.4445 6.58986C11.0201 6.97444 11.4687 7.52107 11.7336 8.16061C11.9985 8.80015 12.0678 9.50388 11.9328 10.1828C11.7977 10.8618 11.4644 11.4854 10.9749 11.9749C10.4854 12.4644 9.86175 12.7977 9.18282 12.9327C8.50389 13.0678 7.80015 12.9985 7.16061 12.7336C6.52107 12.4687 5.97444 12.0201 5.58986 11.4445C5.20527 10.8689 5 10.1922 5 9.5C5.00106 8.57207 5.37015 7.68244 6.0263 7.0263C6.68245 6.37015 7.57207 6.00106 8.5 6ZM8.5 4C7.41221 4 6.34884 4.32257 5.44437 4.92692C4.5399 5.53126 3.83495 6.39025 3.41867 7.39524C3.00238 8.40023 2.89346 9.5061 3.10568 10.573C3.3179 11.6399 3.84173 12.6199 4.61092 13.3891C5.3801 14.1583 6.36011 14.6821 7.42701 14.8943C8.4939 15.1065 9.59977 14.9976 10.6048 14.5813C11.6098 14.1651 12.4687 13.4601 13.0731 12.5556C13.6774 11.6512 14 10.5878 14 9.5C14 8.04131 13.4205 6.64236 12.3891 5.61091C11.3576 4.57946 9.95869 4 8.5 4Z"
+              fill="black"
+            />
+            <path
+              d="M23.5 20C24.1922 20 24.8689 20.2053 25.4445 20.5899C26.0201 20.9744 26.4687 21.5211 26.7336 22.1606C26.9985 22.8001 27.0678 23.5039 26.9328 24.1828C26.7977 24.8617 26.4644 25.4854 25.9749 25.9749C25.4854 26.4644 24.8618 26.7977 24.1828 26.9327C23.5039 27.0678 22.8002 26.9985 22.1606 26.7336C21.5211 26.4687 20.9744 26.0201 20.5899 25.4445C20.2053 24.8689 20 24.1922 20 23.5C20.0011 22.5721 20.3701 21.6824 21.0263 21.0263C21.6824 20.3701 22.5721 20.0011 23.5 20V20ZM23.5 18C22.4122 18 21.3488 18.3226 20.4444 18.9269C19.5399 19.5313 18.8349 20.3902 18.4187 21.3952C18.0024 22.4002 17.8935 23.5061 18.1057 24.573C18.3179 25.6399 18.8417 26.6199 19.6109 27.3891C20.3801 28.1583 21.3601 28.6821 22.427 28.8943C23.4939 29.1065 24.5998 28.9976 25.6048 28.5813C26.6098 28.1651 27.4687 27.4601 28.0731 26.5556C28.6774 25.6512 29 24.5878 29 23.5C29 22.0413 28.4205 20.6424 27.3891 19.6109C26.3576 18.5795 24.9587 18 23.5 18Z"
+              fill="black"
+            />
+            <path
+              d="M6 28V26H9.586L4 20.414L5.414 19L11 24.586V21H13V28H6Z"
+              fill="black"
+            />
+          </svg>
+          Previos hash</label
+        >
+        <div
+          name="prevHash"
+          class="Section__input Section__input--placeholder BlockCard__input BlockCard__input--prevHash"
+          :style="{
+            'background-color': block.isPrevHashValid()
+              ? 'var(--mainColor21)'
+              : 'var(--redInput)',
+          }"
+        >
+          <p class="Section__placeholder">{{ block.prevHash }}</p>
+        </div>
+      </div>
       <div class="Section__inputContainer">
         <label for="hash" class="Section__label BlockCard__label--hash">
           <svg
@@ -105,21 +139,34 @@ function onMineClicked() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M18 28H17.825C17.6951 27.9773 17.5711 27.9293 17.4598 27.8585C17.3486 27.7878 17.2525 27.6957 17.177 27.5877C17.1015 27.4796 17.0481 27.3577 17.0199 27.229C16.9916 27.1002 16.9891 26.9672 17.0125 26.8375L18.075 21.0125H12.1125L10.9875 27.1875C10.9645 27.3171 10.9162 27.441 10.8454 27.552C10.7745 27.6631 10.6825 27.759 10.5745 27.8345C10.4666 27.9099 10.3448 27.9634 10.2162 27.9918C10.0876 28.0202 9.95468 28.0229 9.825 28C9.69532 27.977 9.57144 27.9287 9.46042 27.8578C9.34941 27.787 9.25344 27.6949 9.17799 27.587C9.10254 27.479 9.04909 27.3573 9.0207 27.2287C8.9923 27.1001 8.98952 26.9671 9.0125 26.8375L10.075 21H4C3.73478 21 3.48043 20.8946 3.29289 20.7071C3.10536 20.5195 3 20.2652 3 20C3 19.7347 3.10536 19.4804 3.29289 19.2929C3.48043 19.1053 3.73478 19 4 19H10.4375L11.525 13H5.45C5.18478 13 4.93043 12.8946 4.74289 12.7071C4.55536 12.5195 4.45 12.2652 4.45 12C4.45 11.7347 4.55536 11.4804 4.74289 11.2929C4.93043 11.1053 5.18478 11 5.45 11H11.8875L13.0125 4.82496C13.0589 4.56306 13.2075 4.33032 13.4255 4.17795C13.5334 4.1025 13.6552 4.04906 13.7838 4.02066C13.9124 3.99227 14.0453 3.98948 14.175 4.01246C14.3047 4.03544 14.4286 4.08374 14.5396 4.1546C14.6506 4.22546 14.7466 4.31749 14.822 4.42544C14.8975 4.53338 14.9509 4.65514 14.9793 4.78374C15.0077 4.91234 15.0105 5.04528 14.9875 5.17496L13.925 11H19.8875L21.0125 4.82496C21.0589 4.56306 21.2075 4.33032 21.4255 4.17795C21.6435 4.02558 21.9131 3.96605 22.175 4.01246C22.4369 4.05887 22.6696 4.20743 22.822 4.42544C22.9744 4.64345 23.0339 4.91306 22.9875 5.17496L21.925 11H28C28.2652 11 28.5196 11.1053 28.7071 11.2929C28.8946 11.4804 29 11.7347 29 12C29 12.2652 28.8946 12.5195 28.7071 12.7071C28.5196 12.8946 28.2652 13 28 13H21.5625L20.475 19H26.55C26.8152 19 27.0696 19.1053 27.2571 19.2929C27.4446 19.4804 27.55 19.7347 27.55 20C27.55 20.2652 27.4446 20.5195 27.2571 20.7071C27.0696 20.8946 26.8152 21 26.55 21H20.1125L18.9875 27.175C18.9463 27.4067 18.8247 27.6165 18.6441 27.7674C18.4634 27.9183 18.2354 28.0007 18 28ZM12.475 19H18.4375L19.525 13H13.5625L12.475 19Z"
+              d="M8.5 6C9.19224 6 9.86893 6.20527 10.4445 6.58986C11.0201 6.97444 11.4687 7.52107 11.7336 8.16061C11.9985 8.80015 12.0678 9.50388 11.9328 10.1828C11.7977 10.8618 11.4644 11.4854 10.9749 11.9749C10.4854 12.4644 9.86175 12.7977 9.18282 12.9327C8.50389 13.0678 7.80015 12.9985 7.16061 12.7336C6.52107 12.4687 5.97444 12.0201 5.58986 11.4445C5.20527 10.8689 5 10.1922 5 9.5C5.00106 8.57207 5.37015 7.68244 6.0263 7.0263C6.68245 6.37015 7.57207 6.00106 8.5 6ZM8.5 4C7.41221 4 6.34884 4.32257 5.44437 4.92692C4.5399 5.53126 3.83495 6.39025 3.41867 7.39524C3.00238 8.40023 2.89346 9.5061 3.10568 10.573C3.3179 11.6399 3.84173 12.6199 4.61092 13.3891C5.3801 14.1583 6.36011 14.6821 7.42701 14.8943C8.4939 15.1065 9.59977 14.9976 10.6048 14.5813C11.6098 14.1651 12.4687 13.4601 13.0731 12.5556C13.6774 11.6512 14 10.5878 14 9.5C14 8.04131 13.4205 6.64236 12.3891 5.61091C11.3576 4.57946 9.95869 4 8.5 4Z"
               fill="black"
-            /></svg
-          >Hash</label
+            />
+            <path
+              d="M23.5 20C24.1922 20 24.8689 20.2053 25.4445 20.5899C26.0201 20.9744 26.4687 21.5211 26.7336 22.1606C26.9985 22.8001 27.0678 23.5039 26.9328 24.1828C26.7977 24.8617 26.4644 25.4854 25.9749 25.9749C25.4854 26.4644 24.8618 26.7977 24.1828 26.9327C23.5039 27.0678 22.8002 26.9985 22.1606 26.7336C21.5211 26.4687 20.9744 26.0201 20.5899 25.4445C20.2053 24.8689 20 24.1922 20 23.5C20.0011 22.5721 20.3701 21.6824 21.0263 21.0263C21.6824 20.3701 22.5721 20.0011 23.5 20V20ZM23.5 18C22.4122 18 21.3488 18.3226 20.4444 18.9269C19.5399 19.5313 18.8349 20.3902 18.4187 21.3952C18.0024 22.4002 17.8935 23.5061 18.1057 24.573C18.3179 25.6399 18.8417 26.6199 19.6109 27.3891C20.3801 28.1583 21.3601 28.6821 22.427 28.8943C23.4939 29.1065 24.5998 28.9976 25.6048 28.5813C26.6098 28.1651 27.4687 27.4601 28.0731 26.5556C28.6774 25.6512 29 24.5878 29 23.5C29 22.0413 28.4205 20.6424 27.3891 19.6109C26.3576 18.5795 24.9587 18 23.5 18Z"
+              fill="black"
+            />
+            <path
+              d="M6 19V21H9.586L4 26.586L5.414 28L11 22.414V26H13V19H6Z"
+              fill="black"
+            />
+            <path d="M20 14H27" stroke="black" stroke-width="2" />
+            <path d="M26 5V9H21V13" stroke="black" stroke-width="2" />
+            <path d="M20 5H27" stroke="black" stroke-width="2" />
+          </svg>
+
+          Hash</label
         >
         <div
           name="hash"
           class="Section__input Section__input--placeholder BlockCard__input BlockCard__input--hash"
           :style="{
-            'background-color': block.isValidHash()
+            'background-color': block.isHashValid()
               ? 'var(--mainColor21)'
               : 'var(--redInput)',
           }"
         >
-          <p class="Section__placeholder" :key="block.hash">
+          <p class="Section__placeholder">
             {{ block.hash }}
           </p>
         </div>
@@ -136,9 +183,9 @@ function onMineClicked() {
               fill="black"
             />
           </svg>
-          <span :key="block.isValidHash().toString()">{{
-            block.isValidHash()
-              ? "Valid hash starts with 000."
+          <span :key="block.isHashValid().toString()">{{
+            block.isHashValid()
+              ? "Valid hash starts with 0000."
               : "Invalid hash, please mine again."
           }}</span>
         </label>
@@ -169,7 +216,7 @@ function onMineClicked() {
           id=""
           rows="5"
           class="Section__input BlockCard__input BlockCard__input--data"
-          @keyup="block.onDataChange()"
+          @keyup="onDataChange()"
           v-model="block.data"
         ></textarea>
       </div>
@@ -245,10 +292,10 @@ function onMineClicked() {
       <button
         class="Cta BlockCard__mine"
         :class="
-          block.isValidHash() || isMining ? 'BlockCard__mine--disabled' : ''
+          block.isHashValid() || isMining ? 'BlockCard__mine--disabled' : ''
         "
         :style="{
-          'background-color': block.isValidHash()
+          'background-color': block.isHashValid()
             ? 'var(--grey)'
             : isMining
             ? 'var(--mainColor8)'
@@ -278,6 +325,8 @@ function onMineClicked() {
   opacity: 0;
   animation: fadeScaleInFromAbove var(--revealDuration) var(--mainCubic)
     forwards;
+  box-shadow: var(--gapS) var(--gapS) var(--gapR) var(--mainColor21);
+  margin-bottom: var(--sectionPadding);
   &__header {
     display: flex;
     align-items: center;
@@ -306,7 +355,7 @@ function onMineClicked() {
     color: var(--mainColor3);
     cursor: not-allowed;
     svg {
-      width: var(--fontXXS);
+      width: calc(var(--fontXXS) - 2px);
       path {
         fill: var(--mainColor3);
       }

@@ -23,7 +23,7 @@
     width: 100%;
     height: 100%;
     border-radius: 100%;
-    border: calc(var(--fontM) / 8) solid transparent;
+    border: calc(var(--fontM) / 8.8) solid transparent;
     &--1 {
       border-top-color: var(--mainColor);
       animation: spinning 1.69s var(--mainCubic) infinite;

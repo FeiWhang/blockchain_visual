@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import { Ref, ref, defineAsyncComponent, inject } from "vue";
 import LoadingBlock from "@/components/LoadingBlock.vue";
 import { myScreen } from "@/composables/screen";
+import { defineAsyncComponent, inject, ref, Ref } from "vue";
+import Chain from "@/components/Chain.vue";
 
-const BlockCard = defineAsyncComponent({
-  loader: () => import("@/components/BlockCard.vue"),
-  delay: 0,
-  timeout: 8000,
-  loadingComponent: LoadingBlock,
-});
 const screen: myScreen = inject("screen") as myScreen;
 const showCon: Ref<boolean> = ref<boolean>(false);
 </script>
@@ -16,15 +11,15 @@ const showCon: Ref<boolean> = ref<boolean>(false);
 <template>
   <section class="Section Block">
     <div class="Section__container Block__container">
-      <p class="Section__subtitle">Step 2</p>
-      <h2 class="Section__title">Block</h2>
+      <p class="Section__subtitle">Step 3</p>
+      <h2 class="Section__title">Blockchain</h2>
       <button class="CtaS Section__showCon" @click="showCon = true">
         Show concepts
       </button>
-      <BlockCard />
+      <Chain />
       <transition name="fadeInOut">
-        <div class="SectionConcept" v-if="showCon">
-          <div class="SectionConcept__card">
+        <div class="SectionConcept HashConcept" v-if="showCon">
+          <div class="SectionConcept__card HashConcept__card">
             <div class="SectionConcept__cardContent">
               <button class="SectionConcept__close" @click="showCon = false">
                 <svg viewBox="0 0 16 10">
@@ -62,12 +57,12 @@ const showCon: Ref<boolean> = ref<boolean>(false);
                     </g>
                   </g>
                 </svg>
-                Block
+                Blockchain
               </h1>
               <br />
               <p>
-                A block <span id="HighLightSpan"> is used</span> to store the
-                following information.
+                A blockchian <span id="HighLightSpan"> is used</span> to store
+                the following information.
               </p>
               <br />
             </div>
