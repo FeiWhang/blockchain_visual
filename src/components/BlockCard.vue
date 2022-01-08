@@ -170,7 +170,11 @@ function onDataChange() {
             {{ block.hash }}
           </p>
         </div>
-        <label for="hash" class="Section__inputStatus BlockCard__inputStatus">
+        <label
+          for="hash"
+          class="Section__inputStatus BlockCard__inputStatus"
+          v-if="!props.chain"
+        >
           <svg
             viewBox="0 0 16 16"
             fill="none"
@@ -326,7 +330,6 @@ function onDataChange() {
   animation: fadeScaleInFromAbove var(--revealDuration) var(--mainCubic)
     forwards;
   box-shadow: var(--gapS) var(--gapS) var(--gapR) var(--mainColor21);
-  margin-bottom: var(--sectionPadding);
   &__header {
     display: flex;
     align-items: center;

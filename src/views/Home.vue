@@ -266,15 +266,4 @@ onMounted(() => {
     }
   }
 }
-
-@keyframes hovering {
-  from {
-    transform: translate3d(0, 0, 0);
-    box-shadow: none;
-  }
-  to {
-    transform: translate3d(-2px, -4px, 0);
-    box-shadow: 4px 5px 4px var(--mainColor18);
-  }
-}
 </style>

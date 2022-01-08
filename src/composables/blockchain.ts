@@ -76,12 +76,11 @@ export class Chain {
   }
 
   async addBlock() {
-    const newBlock = new Block(this.length - 1, this.lastBlockHash);
+    const newBlock = new Block(this.length, this.lastBlockHash);
     this.blocks.push(newBlock);
   }
 
   updateHash(index: number) {
-    console.log(index);
     for (let i = index; i < this.length; i++) {
       this.blocks[i].reHash();
       if (i < this.length - 1)

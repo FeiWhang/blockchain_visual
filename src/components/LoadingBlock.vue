@@ -16,7 +16,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 390px;
 }
 
 .scaling-squares-spinner,
