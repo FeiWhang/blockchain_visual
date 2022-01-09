@@ -75,6 +75,14 @@ export class Chain {
     return this.blocks[this.length - 1].hash;
   }
 
+  get isChainValid(): boolean {
+    let isValid: boolean = true;
+    this.blocks.forEach((block) => {
+      isValid = isValid && block.isHashValid();
+    });
+    return isValid;
+  }
+
   async addBlock() {
     const newBlock = new Block(this.length, this.lastBlockHash);
     this.blocks.push(newBlock);

@@ -147,14 +147,11 @@ function onDataChange() {
               fill="black"
             />
             <path
-              d="M6 19V21H9.586L4 26.586L5.414 28L11 22.414V26H13V19H6Z"
+              d="M26 5V7H22.414L28 12.586L26.586 14L21 8.414V12H19V5H26Z"
               fill="black"
             />
-            <path d="M20 14H27" stroke="black" stroke-width="2" />
-            <path d="M26 5V9H21V13" stroke="black" stroke-width="2" />
-            <path d="M20 5H27" stroke="black" stroke-width="2" />
+            <path d="M10 27V18H8V20H5V22H8V27H5V29H13V27H10Z" fill="black" />
           </svg>
-
           Hash</label
         >
         <div
@@ -218,7 +215,7 @@ function onDataChange() {
         <textarea
           name="data"
           id=""
-          rows="5"
+          rows="3"
           class="Section__input BlockCard__input BlockCard__input--data"
           @keyup="onDataChange()"
           v-model="block.data"
@@ -324,12 +321,16 @@ function onDataChange() {
   width: clamp(
     var(--minWidth) - var(--layoutPadding) * 2,
     calc(100vw - var(--layoutPadding) * 2),
-    784px
+    560px
   );
   opacity: 0;
   animation: fadeScaleInFromAbove var(--revealDuration) var(--mainCubic)
     forwards;
-  box-shadow: var(--gapS) var(--gapS) var(--gapR) var(--mainColor21);
+  box-shadow: 4px 4px var(--gapS) var(--mainColor21);
+  transition: box-shadow var(--revealDuration) var(--mainCubic);
+  &:hover {
+    box-shadow: var(--gapS) var(--gapS) var(--gapR) var(--mainColor21);
+  }
   &__header {
     display: flex;
     align-items: center;
@@ -342,7 +343,7 @@ function onDataChange() {
     column-gap: var(--gapS);
     font-size: var(--fontM);
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.88px;
     svg {
       width: var(--fontM);
     }
@@ -365,7 +366,7 @@ function onDataChange() {
     }
   }
   &__form {
-    margin-top: var(--gapM);
+    margin-top: var(--gapS);
   }
   &__input {
     &--hash {

@@ -26,7 +26,7 @@
   --fontS: 16px;
   --fontR: 18px;
   --fontM: 24px;
-  --fontL: 36px;
+  --fontL: 32px;
   --fontXL: clamp(28px, 8.8vw, 64px);
   --mainSkew: -6.9deg;
   --mainCubic: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -100,7 +100,7 @@
     --headerHeight: 72px;
     --headerLogoWidth: 32px;
     --fontM: 22px;
-    --fontL: 34px;
+    --fontL: 30px;
   }
   &--sm {
     --sectionPadding: 96px;
@@ -111,7 +111,7 @@
     --fontS: 15px;
     --fontR: 16px;
     --fontM: 20px;
-    --fontL: 32px;
+    --fontL: 28px;
   }
   &--xs {
     --layoutPadding: 24px;
@@ -126,7 +126,7 @@
     --fontS: 14px;
     --fontR: 15px;
     --fontM: 18px;
-    --fontL: 32px;
+    --fontL: 26px;
     --gapXL: 54px;
     --gapL: 28px;
     --gapM: 18px;

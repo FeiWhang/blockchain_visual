@@ -90,7 +90,7 @@ function setTheme() {
         <div class="Header__rightAction">
           <button class="Header__theme" @click="setTheme" title="Change theme">
             <svg
-              v-if="!isDark"
+              v-if="isDark"
               viewBox="0 0 32 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ function setTheme() {
               />
             </svg>
             <svg
-              v-if="isDark"
+              v-if="!isDark"
               viewBox="0 0 32 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -287,6 +287,7 @@ function setTheme() {
         color: var(--mainColor);
       }
       &--active {
+        font-weight: 500;
         color: var(--mainColor7);
       }
     }

@@ -53,6 +53,7 @@ textarea {
       calc(var(--revealDuration)) forwards;
   }
   &__title {
+    font-family: Raleway;
     font-size: var(--fontL);
     color: var(--mainColor1);
     margin: var(--gapM) 0;
@@ -76,7 +77,7 @@ textarea {
   &__form {
     display: flex;
     flex-direction: column;
-    row-gap: var(--gapL);
+    row-gap: var(--gapM);
   }
   &__label {
     font-family: Inter;
