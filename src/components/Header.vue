@@ -5,6 +5,12 @@ import { myScreen } from "@/composables/screen";
 const screen: myScreen = inject("screen") as myScreen;
 const showMobileDialog = ref(false);
 const isDark = inject("isDark") as Ref<boolean>;
+const routes = [
+  { name: "Home", path: "/" },
+  { name: "Hash", path: "/hash" },
+  { name: "Block", path: "/block" },
+  { name: "Blockchain", path: "/blockchain" },
+];
 
 function setTheme() {
   // save user-theme to storage, get after next reload
@@ -24,7 +30,11 @@ function setTheme() {
   >
     <div class="Header__container">
       <div class="Header__navContainer">
-        <router-link class="Header__logo" to="/">
+        <router-link
+          class="Header__logo"
+          to="/"
+          aria-label="click logo to go back home"
+        >
           <svg
             viewBox="0 0 96 96"
             fill="none"
@@ -53,36 +63,16 @@ function setTheme() {
         </router-link>
         <nav class="HeaderNav">
           <ul class="HeaderNav__list">
-            <li class="HeaderNav__item">
+            <li
+              class="HeaderNav__item"
+              v-for="route in routes"
+              :key="route.name"
+            >
               <router-link
                 class="HeaderNav__link"
-                to="/hash"
+                :to="route.path"
                 active-class="HeaderNav__link--active"
-                >Hash</router-link
-              >
-            </li>
-            <li class="HeaderNav__item">
-              <router-link
-                class="HeaderNav__link"
-                to="/block"
-                active-class="HeaderNav__link--active"
-                >Block</router-link
-              >
-            </li>
-            <li class="HeaderNav__item">
-              <router-link
-                class="HeaderNav__link"
-                to="/blockchain"
-                active-class="HeaderNav__link--active"
-                >Blockchain</router-link
-              >
-            </li>
-            <li class="HeaderNav__item">
-              <router-link
-                class="HeaderNav__link"
-                to="/coin"
-                active-class="HeaderNav__link--active"
-                >Coinbase</router-link
+                >{{ route.name }}</router-link
               >
             </li>
           </ul>
@@ -112,7 +102,11 @@ function setTheme() {
               />
             </svg>
           </button>
-          <button class="Header__mobileHam" @click="showMobileDialog = true">
+          <button
+            class="Header__mobileHam"
+            @click="showMobileDialog = true"
+            aria-label="Show mobile menu"
+          >
             <svg
               viewBox="0 0 36 30"
               fill="none"
@@ -171,40 +165,17 @@ function setTheme() {
         </button>
         <nav class="HeaderNav HeaderNav--mobile">
           <ul class="HeaderNav__list">
-            <li class="HeaderNav__item">
+            <li
+              class="HeaderNav__item"
+              v-for="route in routes"
+              :key="route.name"
+            >
               <router-link
                 class="HeaderNav__link"
-                to="/hash"
-                @click="showMobileDialog = false"
+                :to="route.path"
                 active-class="HeaderNav__link--active"
-                >Hash</router-link
-              >
-            </li>
-            <li class="HeaderNav__item">
-              <router-link
-                class="HeaderNav__link"
-                to="/block"
                 @click="showMobileDialog = false"
-                active-class="HeaderNav__link--active"
-                >Block</router-link
-              >
-            </li>
-            <li class="HeaderNav__item">
-              <router-link
-                class="HeaderNav__link"
-                to="/blockchain"
-                @click="showMobileDialog = false"
-                active-class="HeaderNav__link--active"
-                >Blockchain</router-link
-              >
-            </li>
-            <li class="HeaderNav__item">
-              <router-link
-                class="HeaderNav__link"
-                to="/coin"
-                @click="showMobileDialog = false"
-                active-class="HeaderNav__link--active"
-                >Coinbase</router-link
+                >{{ route.name }}</router-link
               >
             </li>
           </ul>

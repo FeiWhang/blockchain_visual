@@ -111,7 +111,7 @@ function onDataChange() {
       </form>
       <transition name="fadeInOut">
         <div class="SectionConcept HashConcept" v-if="showCon">
-          <div class="SectionConcept__card HashConcept__card">
+          <div class="SectionConcept__card">
             <div class="SectionConcept__cardContent">
               <button class="SectionConcept__close" @click="showCon = false">
                 <svg viewBox="0 0 16 10">
@@ -157,8 +157,8 @@ function onDataChange() {
               </p>
               <br />
               <div
-                class="HashConcept__item"
-                :class="'HashConcept__item--' + screen.type"
+                class="SectionConcept__item"
+                :class="'SectionConcept__item--' + screen.type"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -178,8 +178,8 @@ function onDataChange() {
                 </p>
               </div>
               <div
-                class="HashConcept__item"
-                :class="'HashConcept__item--' + screen.type"
+                class="SectionConcept__item"
+                :class="'SectionConcept__item--' + screen.type"
               >
                 <svg
                   viewBox="0 0 20 20"
@@ -197,8 +197,8 @@ function onDataChange() {
                 </p>
               </div>
               <div
-                class="HashConcept__item"
-                :class="'HashConcept__item--' + screen.type"
+                class="SectionConcept__item"
+                :class="'SectionConcept__item--' + screen.type"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -269,40 +269,6 @@ function onDataChange() {
     opacity: 0;
     animation: fadeInAngle var(--revealDuration) var(--mainCubic)
       calc(var(--revealDuration) * 5) forwards;
-  }
-}
-
-.HashConcept {
-  &__card {
-    max-width: 540px;
-  }
-  &__item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: var(--gapS);
-    margin: var(--gapS) 0;
-    p {
-      text-indent: calc(var(--gapS) + 2px) hanging;
-      &::before {
-        content: "";
-        border-radius: 4px;
-        border: 1px solid var(--mainColor19);
-        margin-right: var(--gapS);
-      }
-    }
-    svg {
-      width: var(--fontM);
-      path {
-        fill: var(--mainColor18);
-      }
-    }
-    &--xs {
-      flex-direction: column;
-      align-items: flex-start;
-      row-gap: var(--gapS);
-      margin: var(--gapM) 0;
-    }
   }
 }
 </style>

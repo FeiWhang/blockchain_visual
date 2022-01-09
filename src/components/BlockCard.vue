@@ -91,7 +91,6 @@ function onDataChange() {
             fill="black"
           />
         </svg>
-
         {{ block.nounce }}
       </p>
     </div>

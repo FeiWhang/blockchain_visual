@@ -246,7 +246,7 @@ onMounted(() => {
     animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
         calc(var(--revealDuration) * 2) forwards,
       hovering 0.88s var(--mainCubic)
-        calc(var(--revealDuration) * 3 + $duration * 5.6789) infinite alternate;
+        calc(var(--revealDuration) * 3 + $duration * 5.555) infinite alternate;
     &:hover {
       animation-play-state: paused;
     }

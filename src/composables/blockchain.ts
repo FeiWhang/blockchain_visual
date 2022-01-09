@@ -26,14 +26,14 @@ export class Block {
     this.mine();
   }
 
-  getText(): string {
+  get text(): string {
     return (
       this.index + this.data + this.prevHash + this.timestamp.toISOString()
     );
   }
 
   reHash() {
-    this.hash = getHash(this.getText() + this.nounce);
+    this.hash = getHash(this.text + this.nounce);
   }
 
   isPrevHashValid(): boolean {
@@ -48,7 +48,7 @@ export class Block {
   async mine() {
     if (this.isHashValid()) return;
     for (let i = 0; i <= maxNounce; i++) {
-      const tmpHash = getHash(this.getText() + i);
+      const tmpHash = getHash(this.text + i);
       if (this.isHashValid(tmpHash)) {
         this.hash = tmpHash;
         this.nounce = i;

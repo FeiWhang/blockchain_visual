@@ -28,7 +28,6 @@ function onAddBlockClicked() {
 
 <template>
   <div class="Chain">
-    <h1 class="Chain__title">Chain #{{ chain.index }}</h1>
     <BlockCard
       v-for="block in chain.blocks"
       :key="block.index"
@@ -59,17 +58,6 @@ function onAddBlockClicked() {
   flex-direction: column;
   row-gap: calc(var(--sectionPadding) * 0.8);
   padding-bottom: 720px;
-  &__title {
-    font-family: Inter;
-    margin-bottom: calc(var(--sectionPadding) * -0.75);
-    color: var(--mainColor8);
-    font-size: var(--fontM);
-    padding: var(--buttonPadding);
-    letter-spacing: 0.88px;
-    opacity: 0;
-    animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
-      calc(var(--revealDuration)) forwards;
-  }
   &__addBlock {
     align-self: center;
     display: inline-block;

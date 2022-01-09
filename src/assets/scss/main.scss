@@ -63,7 +63,7 @@ textarea {
   }
   &__showCon {
     color: var(--mainColor23);
-    background-color: var(--mainColor5);
+    background-color: var(--mainColor7);
     transition: var(--buttonHoverTransition);
     &:hover {
       box-shadow: 4px 5px 4px var(--mainColor15);
@@ -164,7 +164,7 @@ textarea {
     color: var(--mainColor22);
     line-height: var(--gapM);
     font-size: var(--fontS);
-    max-width: 720px;
+    max-width: 540px;
     box-shadow: var(--gapS) var(--gapS) var(--gapR) var(--mainColor5);
     animation: fadeScaleInFromAbove var(--revealDuration) var(--mainCubic)
       forwards;
@@ -184,6 +184,34 @@ textarea {
       path {
         fill: var(--mainColor18);
       }
+    }
+  }
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: var(--gapS);
+    margin: calc(var(--gapS) + 2px) 0;
+    p {
+      text-indent: calc(var(--gapS) + 2px) hanging;
+      &::before {
+        content: "";
+        border-radius: 4px;
+        border: 1px solid var(--mainColor19);
+        margin-right: var(--gapS);
+      }
+    }
+    svg {
+      width: var(--fontM);
+      path {
+        fill: var(--mainColor18);
+      }
+    }
+    &--xs {
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: var(--gapS);
+      margin: var(--gapM) 0;
     }
   }
   &__readmore {
