@@ -57,13 +57,16 @@ function copyEther() {
   align-items: center;
   justify-content: center;
   height: var(--footerHeight);
-  row-gap: var(--gapM);
-  background-color: var(--mainColor22);
+  row-gap: 8px;
+  opacity: 0;
+  $duration: 0.369s;
+  animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
+    calc(var(--revealDuration) * 3) forwards;
   &__text {
-    font-size: var(--fontS);
-    color: var(--mainColor3);
+    font-size: var(--fontXS);
+    color: var(--mainColor4);
     a {
-      color: var(--mainColor5);
+      color: var(--mainColor6);
       text-decoration: none;
       &:hover {
         text-decoration: underline;
@@ -78,18 +81,22 @@ function copyEther() {
       align-items: center;
       font-size: var(--fontXXS);
       justify-content: center;
-      color: var(--mainColor4);
+      color: var(--mainColor5);
       column-gap: var(--gapS);
+      &:hover {
+        color: var(--mainColor4);
+      }
     }
   }
 }
 #FooterEther {
-  position: relative;
   &::after {
     content: "Key copied !";
     font-family: Inter;
-    position: absolute;
-    left: 36.9%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    bottom: calc(var(--gapM) + var(--footerHeight));
     background-color: var(--mainColor18);
     padding: var(--gapS);
     border-radius: var(--radiusS);
@@ -101,7 +108,7 @@ function copyEther() {
 @keyframes fadeInAndOutFromBelow {
   0% {
     opacity: 0;
-    transform: translate3d(0, -16px, 0);
+    transform: translate3d(0, 16px, 0);
   }
   15% {
     opacity: 1;
@@ -113,7 +120,7 @@ function copyEther() {
   }
   100% {
     opacity: 0;
-    transform: translate3d(0, -16px, 0);
+    transform: translate3d(0, 16px, 0);
   }
 }
 </style>

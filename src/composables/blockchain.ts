@@ -23,7 +23,17 @@ export class Block {
     this.hash = "";
     this.timestamp = new Date();
     this.nounce = 0;
-    this.mine();
+    // if not genesis -> mine
+    if (index != 0) this.mine();
+    // hard-coded for genesis block
+    else {
+      this.hash =
+        "0000f414cc26bae3dee6dc5e401b6316277fa6b576d69e760f5ca51926d5dcb5";
+      this.nounce = 1915;
+      this.timestamp = new Date(
+        "Mon Jan 10 2022 14:38:51 GMT+0700 (Indochina Time)"
+      );
+    }
   }
 
   get text(): string {

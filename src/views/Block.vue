@@ -2,13 +2,8 @@
 import { Ref, ref, defineAsyncComponent, inject } from "vue";
 import LoadingBlock from "@/components/LoadingBlock.vue";
 import { myScreen } from "@/composables/screen";
+import BlockCard from "@/components/BlockCard.vue";
 
-const BlockCard = defineAsyncComponent({
-  loader: () => import("@/components/BlockCard.vue"),
-  delay: 0,
-  timeout: 8000,
-  loadingComponent: LoadingBlock,
-});
 const screen: myScreen = inject("screen") as myScreen;
 const showCon: Ref<boolean> = ref<boolean>(false);
 </script>
@@ -21,7 +16,9 @@ const showCon: Ref<boolean> = ref<boolean>(false);
       <button class="CtaS Section__showCon" @click="showCon = true">
         Show concepts
       </button>
-      <BlockCard />
+      <BlockCard
+        :style="{ 'animation-delay': 'calc(var(--revealDuration) * 3)' }"
+      />
       <transition name="fadeInOut">
         <div class="SectionConcept" v-if="showCon">
           <div class="SectionConcept__card">

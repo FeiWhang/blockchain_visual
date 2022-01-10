@@ -2,15 +2,10 @@
 import LoadingBlock from "@/components/LoadingBlock.vue";
 import { myScreen } from "@/composables/screen";
 import { defineAsyncComponent, inject, ref, Ref } from "vue";
+import Chain from "@/components/Chain.vue";
 
 const screen: myScreen = inject("screen") as myScreen;
 const showCon: Ref<boolean> = ref<boolean>(false);
-const Chain = defineAsyncComponent({
-  loader: () => import("@/components/Chain.vue"),
-  delay: 0,
-  timeout: 8000,
-  loadingComponent: LoadingBlock,
-});
 </script>
 
 <template>

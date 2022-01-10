@@ -2,13 +2,7 @@
 import { Chain } from "@/composables/blockchain";
 import { defineAsyncComponent, ref, Ref } from "vue";
 import LoadingBlock from "@/components/LoadingBlock.vue";
-
-const BlockCard = defineAsyncComponent({
-  loader: () => import("@/components/BlockCard.vue"),
-  delay: 0,
-  timeout: 8000,
-  loadingComponent: LoadingBlock,
-});
+import BlockCard from "@/components/BlockCard.vue";
 
 const chain = ref(new Chain(1));
 const isAdding = ref(false);
@@ -34,6 +28,10 @@ function onAddBlockClicked() {
       :block="block"
       :chain="chain"
       :id="'block' + block.index"
+      :style="{
+        'animation-delay':
+          block.index == 0 ? 'calc(var(--revealDuration) * 3)' : 0,
+      }"
     />
     <LoadingBlock v-if="isAdding" />
     <button
@@ -65,8 +63,8 @@ function onAddBlockClicked() {
     opacity: 0;
     backface-visibility: hidden;
     animation: fadeInFromAbove var(--revealDuration) var(--mainCubic)
-        calc(var(--revealDuration) * 2) forwards,
-      hovering 0.88s var(--mainCubic) calc(var(--revealDuration) * 2.5) infinite
+        calc(var(--revealDuration) * 4) forwards,
+      hovering 0.88s var(--mainCubic) calc(var(--revealDuration) * 4.5) infinite
         alternate;
     &:hover {
       animation-play-state: paused;
