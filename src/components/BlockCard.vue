@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Block, Chain } from "@/composables/blockchain";
-import { Ref, ref, onBeforeMount } from "vue";
+import { Ref, ref } from "vue";
 import LoadingCircle from "@/components/LoadingCircle.vue";
 
 const props = defineProps({
@@ -326,7 +326,6 @@ function onDataChange() {
   animation: fadeScaleInFromAbove var(--revealDuration) var(--mainCubic)
     forwards;
   box-shadow: 4px 4px var(--gapS) var(--mainColor21);
-  transition: box-shadow var(--revealDuration) var(--mainCubic);
   &:hover {
     box-shadow: var(--gapS) var(--gapS) var(--gapR) var(--mainColor21);
   }
@@ -410,7 +409,7 @@ function onDataChange() {
     padding: var(--buttonPaddingS);
     color: var(--mainColor22);
     align-self: center;
-    transition: all var(--hoverDuration) var(--mainCubic);
+    transition: var(--buttonHoverTransition);
     svg {
       width: var(--fontR);
       path {

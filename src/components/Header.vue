@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, inject, Ref } from "vue";
 import { myScreen } from "@/composables/screen";
+import { Router, useRouter } from "vue-router";
 
 const screen: myScreen = inject("screen") as myScreen;
-const showMobileDialog = ref(false);
+const showMobileDialog = ref(false) as Ref<boolean>;
 const isDark = inject("isDark") as Ref<boolean>;
 const routes = [
   { name: "Home", path: "/" },
@@ -11,6 +12,14 @@ const routes = [
   { name: "Block", path: "/block" },
   { name: "Blockchain", path: "/blockchain" },
 ];
+const router: Router = useRouter();
+
+function onMobileNavClicked(path: string) {
+  showMobileDialog.value = false;
+  setTimeout(() => {
+    router.push(path);
+  }, 200);
+}
 
 function setTheme() {
   // save user-theme to storage, get after next reload
@@ -170,13 +179,14 @@ function setTheme() {
               v-for="route in routes"
               :key="route.name"
             >
-              <router-link
+              <div
                 class="HeaderNav__link"
                 :to="route.path"
                 active-class="HeaderNav__link--active"
-                @click="showMobileDialog = false"
-                >{{ route.name }}</router-link
+                @click="onMobileNavClicked(route.path)"
               >
+                {{ route.name }}
+              </div>
             </li>
           </ul>
         </nav>

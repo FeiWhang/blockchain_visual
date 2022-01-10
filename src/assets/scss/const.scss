@@ -13,6 +13,7 @@
   --sectionPadding: 128px;
   --sectionHeightMax: 1080px;
   --headerHeight: 84px;
+  --footerHeight: 0px;
   --headerLogoWidth: 36px;
   --gapXL: 64px;
   --gapL: 32px;
@@ -121,10 +122,10 @@
     --buttonPaddingS: 6px 10px;
     --headerHeight: 64px;
     --headerLogoWidth: 32px;
-    --fontXXS: 12px;
-    --fontXS: 13px;
-    --fontS: 14px;
-    --fontR: 15px;
+    --fontXXS: 11px;
+    --fontXS: 12px;
+    --fontS: 13px;
+    --fontR: 14px;
     --fontM: 18px;
     --fontL: 26px;
     --gapXL: 54px;
@@ -132,6 +133,9 @@
     --gapM: 18px;
     --gapR: 12px;
     --gapS: 6px;
+  }
+  &--footer {
+    --footerHeight: 128px;
   }
 }
 

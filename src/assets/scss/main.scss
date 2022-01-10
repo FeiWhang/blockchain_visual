@@ -38,7 +38,7 @@ textarea {
     max-width: var(--layoutWidth);
     margin: 0 auto;
     padding: var(--sectionPadding) var(--layoutPadding);
-    min-height: calc(100vh - var(--headerHeight));
+    min-height: calc(100vh - var(--headerHeight) - var(--footerHeight));
     display: flex;
     flex-direction: column;
     align-items: center;

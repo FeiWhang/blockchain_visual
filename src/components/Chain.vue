@@ -57,7 +57,6 @@ function onAddBlockClicked() {
   align-items: center;
   flex-direction: column;
   row-gap: calc(var(--sectionPadding) * 0.8);
-  padding-bottom: 720px;
   &__addBlock {
     align-self: center;
     display: inline-block;

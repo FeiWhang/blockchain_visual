@@ -228,7 +228,7 @@ onMounted(() => {
       calc(var(--revealDuration)) forwards;
   }
   &__heroSubtitle {
-    font-size: var(--fontR);
+    font-size: var(--fontM);
     color: var(--mainColor3);
     font-weight: 400;
     margin-bottom: var(--gapL);

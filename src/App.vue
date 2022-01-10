@@ -2,14 +2,17 @@
 import { ref, provide, Ref } from "vue";
 import { myScreen, useScreen } from "@/composables/screen";
 import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import { Router, useRouter } from "vue-router";
 
 const screen = ref(useScreen()) as Ref<myScreen>;
-
+const router: Router = useRouter();
 // set default dark to device theme
 const isDark = ref(window.matchMedia("(prefers-color-scheme: dark)").matches);
 // detect user-theme and set to isDark
 const userTheme = localStorage.getItem("user-theme");
 if (userTheme) {
+  // userTheme not null
   isDark.value = userTheme === "dark";
 }
 
@@ -20,10 +23,15 @@ provide("screen", screen);
 <template>
   <div
     class="Content"
-    :class="['Content--' + screen.type, isDark ? 'Content--dark' : '']"
+    :class="[
+      'Content--' + screen.type,
+      isDark ? 'Content--dark' : '',
+      router.currentRoute.value.path == '/' ? 'Content--footer' : '',
+    ]"
   >
     <Header />
     <router-view></router-view>
+    <Footer v-if="router.currentRoute.value.path == '/'" />
   </div>
 </template>
 
